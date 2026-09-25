@@ -5,7 +5,6 @@ export default function App() {
     <>
         <h1>💖 Hello World!</h1>
         <p>Welcome to your Electron application.</p>
-        <script type="module" src="/src/renderer.js"></script>
     </>
   );
 }

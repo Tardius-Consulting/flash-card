@@ -28,9 +28,12 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
-import './index.css'; // Mantenha os estilos globais se houver
 
-const root = createRoot(document.getElementById('root'));
+const conteiner = document.getElementById('root')
+
+if(!conteiner) throw new Error("root not found!")
+
+const root = createRoot(conteiner);
 root.render(
   <React.StrictMode>
     <App />
