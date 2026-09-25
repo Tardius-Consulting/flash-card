@@ -7,7 +7,7 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, '../preload/index.mjs'),
+      preload: path.join(__dirname, '../preload/index.js'),
     },
   });
 
@@ -36,7 +36,7 @@ app.whenReady().then(() => {
     }
   });
 });
-
+import "./auth.main.js"
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.

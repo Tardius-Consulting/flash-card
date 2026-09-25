@@ -25,7 +25,7 @@ export class TokenFactory{
         return `${dataToSign}.${encodedSignature}`;
     }
 
-    public verificarJWT(token: string): any {
+    public verificarJWT(token: string) {
         const parts = token.split('.');
         if (parts.length !== 3) {
             throw new Error("Token inválido: formato incorreto.");
@@ -35,7 +35,7 @@ export class TokenFactory{
 
         // Recria a assinatura no servidor para comparar
         const dataToSign = `${encodedHeader}.${encodedPayload}`;
-        const hmac = crypto.createHmac('sha256', process.env.SECRET_KEY as any);
+        const hmac = crypto.createHmac('sha256', process.env.SECRET_KEY);
         hmac.update(dataToSign);
         const expectedSignature = this.base64UrlEncode(hmac.digest());
 

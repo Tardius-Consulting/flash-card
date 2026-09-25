@@ -4,18 +4,21 @@
   "description": "",
   "license": "ISC",
   "author": "",
-  "type": "module",
+  "type": "commonjs",
   "main": "./out/main/index.js",
   "scripts": {
-    "dev": "MAIN_WINDOW_VITE_DEV_SERVER_URL=http://localhost:5173/ electron-vite dev",
+    "dev": "MAIN_WINDOW_VITE_DEV_SERVER_URL=http://localhost:5173/ SECRET_KEY=test_key electron-vite dev",
     "build": "electron-vite build",
+    "lint": "eslint ./src/",
     "test": "jest"
   },
   "dependencies": {
+    "jiti": "^2.7.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
     "@jest/globals": "^30.5.2",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.11.0",
@@ -23,11 +26,13 @@
     "@types/react-dom": "^19.3.0",
     "electron": "^44.4.5",
     "electron-vite": "^5.0.0",
-    "eslint": "^10.11.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react": "^7.37.5",
     "jest": "^30.5.2",
     "prettier": "^3.9.9",
     "ts-jest": "^29.4.13",
     "typescript": "^6.0.0",
+    "typescript-eslint": "^8.70.1",
     "vite": "^7.0.0"
   },
   "allowScripts": {
