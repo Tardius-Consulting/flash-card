@@ -4,10 +4,10 @@
   "description": "",
   "license": "ISC",
   "author": "",
-  "type": "module",
+  "type": "commonjs",
   "main": "./out/main/index.js",
   "scripts": {
-    "dev": "MAIN_WINDOW_VITE_DEV_SERVER_URL=http://localhost:5173/ electron-vite dev",
+    "dev": "MAIN_WINDOW_VITE_DEV_SERVER_URL=http://localhost:5173/ SECRET_KEY=test_key electron-vite dev",
     "build": "electron-vite build",
     "test": "jest"
   },

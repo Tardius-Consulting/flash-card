@@ -28,7 +28,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import Login from './Login';
-import { MockAuthGateway } from './Infrastructure/MockAuthGateway';
+import { ElectronAuthGateway } from './Infrastructure/ElectronAuthGateway';
 
 const conteiner = document.getElementById('root')
 
@@ -36,7 +36,7 @@ if(!conteiner) throw new Error("root not found!")
 
 const root = createRoot(conteiner);
 
-const authGateway = new MockAuthGateway()
+const authGateway = new ElectronAuthGateway()
 root.render(
   <React.StrictMode>
     <Login gateway={authGateway}/>
