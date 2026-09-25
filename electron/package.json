@@ -13,7 +13,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "jiti": "^2.7.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },
@@ -29,8 +28,10 @@
     "eslint": "^9.39.5",
     "eslint-plugin-react": "^7.37.5",
     "jest": "^30.5.2",
+    "jiti": "^2.7.0",
     "prettier": "^3.9.9",
     "ts-jest": "^29.4.13",
+    "ts-node": "^10.9.2",
     "typescript": "^6.0.0",
     "typescript-eslint": "^8.70.1",
     "vite": "^7.0.0"
