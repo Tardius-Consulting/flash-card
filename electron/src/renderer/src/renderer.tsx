@@ -27,16 +27,19 @@
  */
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
+import Login from './Login';
+import { MockAuthGateway } from './Infrastructure/MockAuthGateway';
 
 const conteiner = document.getElementById('root')
 
 if(!conteiner) throw new Error("root not found!")
 
 const root = createRoot(conteiner);
+
+const authGateway = new MockAuthGateway()
 root.render(
   <React.StrictMode>
-    <App />
+    <Login gateway={authGateway}/>
   </React.StrictMode>
 );
 
