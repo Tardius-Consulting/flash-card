@@ -1,16 +1,16 @@
-import { ChangeEvent, useState } from "react"
+import { type ChangeEvent, useState } from "react"
 import React from "react"
-import { IAuthGateway } from "./Infrastructure/IAuthGateway"
+import type{ IAuthGateway } from "./Infrastructure/IAuthGateway.js"
 
 export default function Login({gateway}:{gateway:IAuthGateway}){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const onChangeEmail=(e:ChangeEvent<HTMLInputElement>)=>{
-        let value = e.target.value
+        const value = e.target.value
         setEmail(value)
     }
     const onChangePassword=(e:ChangeEvent<HTMLInputElement>)=>{
-        let value = e.target.value
+        const value = e.target.value
         setPassword(value)
     }
 
