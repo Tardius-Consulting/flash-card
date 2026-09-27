@@ -1,5 +1,5 @@
-import { IAuthRepository } from "./IAuthRepository";
-import { TokenFactory } from "./TokenFactory";
+import { IAuthRepository } from "../repositories/IAuthRepository";
+import { TokenFactory } from "../model/TokenFactory";
 
 export class LoginUseCase{
     constructor(private repository:IAuthRepository){}
