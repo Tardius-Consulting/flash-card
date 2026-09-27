@@ -27,8 +27,8 @@
  */
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import Login from './Login';
 import { ElectronAuthGateway } from './Infrastructure/ElectronAuthGateway';
+import Login from './pages/Login';
 
 const conteiner = document.getElementById('root')
 
