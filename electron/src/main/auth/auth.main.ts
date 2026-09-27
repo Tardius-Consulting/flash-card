@@ -1,6 +1,6 @@
 import { ipcMain } from "electron";
-import { LoginUseCase } from "./auth/LoginUseCase.js";
-import { MockAuthRepository } from "./auth/MockAuthRepository.js";
+import { LoginUseCase } from "./LoginUseCase.js";
+import { MockAuthRepository } from "./MockAuthRepository.js";
 const repository = new MockAuthRepository()
 const login = new LoginUseCase(repository)
 
