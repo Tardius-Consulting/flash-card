@@ -27,20 +27,18 @@
  */
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { ElectronAuthGateway } from './Infrastructure/ElectronAuthGateway';
-import Login from './pages/Login';
+import { BrowserRouter } from 'react-router-dom';
+import App from "./pages/App"
 
 const conteiner = document.getElementById('root')
 
 if(!conteiner) throw new Error("root not found!")
 
 const root = createRoot(conteiner);
-
-const authGateway = new ElectronAuthGateway()
 root.render(
-  <React.StrictMode>
-    <Login gateway={authGateway}/>
-  </React.StrictMode>
+  <BrowserRouter>
+    <App/>
+  </BrowserRouter>
 );
 
 

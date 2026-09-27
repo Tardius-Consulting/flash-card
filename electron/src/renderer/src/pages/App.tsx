@@ -1,10 +1,14 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom'
+import Login from './Login';
+import { ElectronAuthGateway } from '../Infrastructure/ElectronAuthGateway';
 
 export default function App() {
+
+  const authGateway = new ElectronAuthGateway()
   return (
-    <>
-        <h1>💖 Hello World!</h1>
-        <p>Welcome to your Electron application.</p>
-    </>
+    <Routes>
+      <Route path='/' element={<Login gateway={authGateway}/>}/>
+    </Routes>
   );
 }
