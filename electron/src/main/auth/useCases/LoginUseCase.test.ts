@@ -1,6 +1,6 @@
 import { describe, it, beforeEach, expect } from "@jest/globals";
 import { LoginUseCase } from "./LoginUseCase";
-import { IAuthRepository } from "./IAuthRepository";
+import { IAuthRepository } from "../repositories/IAuthRepository";
 
 const correctEmail = "correct@email.com"
 const correctPassword = "Correct"
