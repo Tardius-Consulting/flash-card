@@ -2,13 +2,14 @@ import * as crypto from 'crypto';
 
 export class TokenFactory{
     constructor(){}
-    public assemble(userID:string){
+    public assemble(userID:string,meta?:unknown){
         const header = {
             alg:"HS256",
             typ:"JWT"
         }
         const payload = {
             sub:userID,
+            meta,
             iat:Date.now()
         }
         const encodedHeader = this.base64UrlEncode(JSON.stringify(header))
