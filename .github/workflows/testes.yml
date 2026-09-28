@@ -1,0 +1,18 @@
+name: teste
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  testeD:
+    name: Run Desktop testes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+      - name: setup and run test desktop
+        working-directory: ./electron
+        run: 
+          npm install
+          npm run test
