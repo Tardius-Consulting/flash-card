@@ -1,4 +1,4 @@
-import type { IAuthRepository } from "./repositories/IAuthRepository.js";
+import type { IAuthRepository } from "../repositories/IAuthRepository.js";
 
 export class MockAuthRepository implements IAuthRepository{
     async isValid(email: string, password: string): Promise<{ isValid: boolean; data: { userID: string; } | undefined; }> {
