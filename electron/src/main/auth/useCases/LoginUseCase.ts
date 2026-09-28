@@ -4,7 +4,7 @@ import { TokenFactory } from "../model/TokenFactory";
 export class LoginUseCase{
     constructor(private repository:IAuthRepository){}
     public async exec(email:string,password:string) {
-        const result = await this.repository.isValid(email,password)
+        const result = await this.repository.getUser(email,password)
         if(!result.isValid)
         return{
             error:400,

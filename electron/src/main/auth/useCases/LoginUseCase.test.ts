@@ -9,7 +9,7 @@ const wrongEmail = "wrong@email.com"
 
 let usecase:LoginUseCase
 const repository:IAuthRepository = {
-    isValid: function (email: string, password: string):Promise<{isValid:boolean,data:{userID:string}|undefined}> {
+    getUser: function (email: string, password: string):Promise<{isValid:boolean,data:{userID:string}|undefined}> {
         const validPair = email==correctEmail && password == correctPassword
         if(validPair) return Promise.resolve({isValid:true,data:{userID:"01"}})
         return Promise.resolve({isValid:false,data:undefined})
