@@ -1,6 +1,7 @@
 import { describe, it, beforeEach, expect } from "@jest/globals";
 import { LoginUseCase } from "./LoginUseCase";
 import { IAuthRepository } from "../repositories/IAuthRepository";
+import { UserNotFoundException } from "./Errors/Exceptions";
 
 const correctEmail = "correct@email.com"
 const correctPassword = "Correct"
@@ -30,8 +31,7 @@ describe('Login Use Cases tests',()=>{
     })
     describe("Miss match",()=>{
         it("Wrong email",async ()=>{
-            const result = await usecase.exec(wrongEmail,correctPassword)
-            expect(result).toEqual({error:400,message:"Usuário não autorizado"})
+            expect(usecase.exec(wrongEmail,correctPassword)).rejects.toThrow(UserNotFoundException)
         })
     })
 })
