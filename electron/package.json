@@ -7,7 +7,8 @@
   "type": "commonjs",
   "main": "./out/main/index.js",
   "scripts": {
-    "dev": "MAIN_WINDOW_VITE_DEV_SERVER_URL=http://localhost:5173/ SECRET_KEY=test_key electron-vite dev",
+    "dev:linux": "MAIN_WINDOW_VITE_DEV_SERVER_URL=http://localhost:5173/ SECRET_KEY=test_key electron-vite dev",
+    "dev:windows": "set MAIN_WINDOW_VITE_DEV_SERVER_URL=http://localhost:5173/&& set SECRET_KEY=test_key&& electron-vite dev",
     "build": "electron-vite build",
     "lint": "eslint ./src/",
     "test": "jest"
