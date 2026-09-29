@@ -1,7 +1,7 @@
 import { ipcMain } from "electron";
 import { LoginUseCase } from "./useCases/LoginUseCase.js";
 import { MockAuthRepository } from "./repositories/MockAuthRepository.js";
-import { UserNotFoundException } from "./useCases/Errors/Exceptions.js";
+import { InvalidGrantException, UserNotFoundException } from "./useCases/Errors/Exceptions.js";
 import { AuthCallBackUseCase } from "./useCases/AuthCallBackUseCase.js";
 const repository = new MockAuthRepository()
 const login = new LoginUseCase(repository)
@@ -24,8 +24,12 @@ ipcMain.handle('auth:initLogin',async(event)=>{
 })
 
 ipcMain.handle('auth:handleAuthCallback',async (event,code)=>{
-    let token = await authCallback.execute(code)
-    ipcMain.emit('auth:initSession',token)
+    try{
+        let token = await authCallback.execute(code)
+        ipcMain.emit('auth:initSession',token)
+    }catch(err){
+        if(err instanceof InvalidGrantException)console.log(err.message)
+    }
 })
 
 ipcMain.handle('auth:initSession',async(event,token)=>{
