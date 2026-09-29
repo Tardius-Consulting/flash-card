@@ -16,14 +16,14 @@ const repository:IAuthRepository = {
         return Promise.resolve(null)
     },
     registerAutorizationCode:jest.fn() as any,
-    validateCode:async()=>{return false},
+    validateAutorizationCode:async()=>{return false},
     registerRefreshCode:async()=>{}
 }
 
 jest.mock("../model/CodeFactory",()=>({
     CodeFactory:{
         generateRandomCode:jest.fn(()=>{
-            return "codigo de validação"
+            return {token:"codigo de validação"}
         })
     }
 }))

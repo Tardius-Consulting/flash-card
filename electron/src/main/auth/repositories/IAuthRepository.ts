@@ -1,6 +1,6 @@
 export interface IAuthRepository{
     getUser(email:string,password:string):Promise<{userID:string}|null>
-    registerAutorizationCode(code:string):Promise<void>
-    validateCode(code:string):Promise<boolean>
-    registerRefreshCode(code:string):Promise<void>
+    registerAutorizationCode(code:string,data:unknown):Promise<void>
+    validateAutorizationCode(code:string):Promise<unknown>
+    registerRefreshCode(code:string,data:unknown):Promise<void>
 }
