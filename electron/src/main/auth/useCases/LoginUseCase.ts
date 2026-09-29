@@ -1,6 +1,7 @@
 import { IAuthRepository } from "../repositories/IAuthRepository";
 import { TokenFactory } from "../model/TokenFactory";
 import { UserNotFoundException } from "./Errors/Exceptions";
+import { CodeFactory } from "../model/CodeFactory";
 
 export class LoginUseCase{
     constructor(private repository:IAuthRepository){}
@@ -8,7 +9,8 @@ export class LoginUseCase{
         const result = await this.repository.getUser(email,password)
         if(!result)
             throw new UserNotFoundException()
-        const token = new TokenFactory().assemble(result.userID)
-        return {...result,token}
+        const code = CodeFactory.generateRandomCode()
+        this.repository.registerAutorizationCode(code)
+        return code
     }
 }
