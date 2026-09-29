@@ -7,8 +7,8 @@ export class AuthCallBackUseCase{
     public async execute(code:string){
         let isValid = await this.repository.validateCode(code)
         if(!isValid)throw new InvalidGrantException()
-        const refresh = CodeFactory.generateRandomCode()
-        await this.repository.registerRefreshCode(refresh)
-        return refresh
+        const {token, cryptoToken} = CodeFactory.generateRandomCode()
+        await this.repository.registerRefreshCode(cryptoToken)
+        return token
     }
 }

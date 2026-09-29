@@ -12,6 +12,6 @@ export class CodeFactory{
         }
 
         const cryptoValue = crypto.createHmac('sha256',"teste_key").update(resultado).digest()
-        return Buffer.from(cryptoValue).toString('base64');
+        return {token:resultado,cryptoToken:Buffer.from(cryptoValue).toString('base64')};
     }
 }

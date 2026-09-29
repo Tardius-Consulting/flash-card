@@ -9,8 +9,8 @@ export class LoginUseCase{
         const result = await this.repository.getUser(email,password)
         if(!result)
             throw new UserNotFoundException()
-        const code = CodeFactory.generateRandomCode()
-        this.repository.registerAutorizationCode(code)
-        return code
+        const {token,cryptoToken} = CodeFactory.generateRandomCode()
+        this.repository.registerAutorizationCode(cryptoToken)
+        return token
     }
 }
