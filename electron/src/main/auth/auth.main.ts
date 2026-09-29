@@ -2,14 +2,16 @@ import { ipcMain } from "electron";
 import { LoginUseCase } from "./useCases/LoginUseCase.js";
 import { MockAuthRepository } from "./repositories/MockAuthRepository.js";
 import { UserNotFoundException } from "./useCases/Errors/Exceptions.js";
+import { AuthCallBackUseCase } from "./useCases/AuthCallBackUseCase.js";
 const repository = new MockAuthRepository()
 const login = new LoginUseCase(repository)
+const authCallback = new AuthCallBackUseCase(repository)
 
 ipcMain.handle('auth:Login',async (event,data:{email:string,password:string})=>{
     console.log("init auth")
     try{
         let code = login.exec(data.email,data.password)
-        ipcMain.emit('auth:initSession',code)
+        ipcMain.emit('auth:handleAuthCallback',code)
     }catch(err){
         if(err instanceof UserNotFoundException)
             return{ok:false,message:err.message}
@@ -22,7 +24,7 @@ ipcMain.handle('auth:initLogin',async(event)=>{
 })
 
 ipcMain.handle('auth:handleAuthCallback',async (event,code)=>{
-    let token = code
+    let token = await authCallback.execute(code)
     ipcMain.emit('auth:initSession',token)
 })
 

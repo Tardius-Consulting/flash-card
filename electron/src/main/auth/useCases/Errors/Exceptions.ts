@@ -9,3 +9,9 @@ export class UserNotFoundException extends BaseException{
         super(message)
     }
 }
+
+export class InvalidGrantException extends BaseException{
+    constructor(message:string = 'Authorization code is invalid or expired'){
+        super(message)
+    }
+}
