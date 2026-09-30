@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router'
 import Login from './Login';
 import { ElectronAuthGateway } from '../Infrastructure/ElectronAuthGateway';
 import SignUp from './SignUp';
@@ -22,13 +22,14 @@ const SharedHomeRoutes = () => (
 export default function App() {
 
   const authGateway = new ElectronAuthGateway()
+  const home = <HomeConteiner gateway={authGateway}/>
   return (
     <Routes>
         <Route path='/Login' element={<Login gateway={authGateway}/>}/>
-        <Route path='/' element={<HomeConteiner/>}>
+        <Route path='/' element={home}>
           {SharedHomeRoutes()}
         </Route>
-        <Route path='/home' element={<HomeConteiner/>}>
+        <Route path='/home' element={home}>
           {SharedHomeRoutes()}
         </Route>
         <Route path='/SignUp' element={<SignUp/>}/>

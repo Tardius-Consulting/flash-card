@@ -1,10 +1,12 @@
 import { type ChangeEvent, useState } from "react"
 import React from "react"
 import type{ IAuthGateway } from "../Infrastructure/IAuthGateway.js"
+import { useNavigate } from "react-router"
 
 export default function Login({gateway}:{gateway:IAuthGateway}){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const navigate = useNavigate()
     const onChangeEmail=(e:ChangeEvent<HTMLInputElement>)=>{
         const value = e.target.value
         setEmail(value)
@@ -24,7 +26,7 @@ export default function Login({gateway}:{gateway:IAuthGateway}){
     }
 
     const onClick=()=>{
-
+        navigate("/SignUp")
     }
     return <div className="">
         <form onSubmit={onSubmit} style={{
