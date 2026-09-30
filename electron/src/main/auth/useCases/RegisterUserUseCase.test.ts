@@ -2,7 +2,6 @@ import { describe, expect, it, jest } from "@jest/globals";
 import { RegisterUseCase } from "./RegisterUserUseCase";
 import { IAuthRepository } from "../repositories/IAuthRepository";
 import { PasswordHasher } from "../model/IPassWordHash";
-import { User } from "../model/User";
 
 const repository:IAuthRepository={
     getUser: jest.fn() as any,

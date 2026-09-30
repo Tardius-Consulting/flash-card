@@ -31,9 +31,7 @@ jest.mock("../model/CodeFactory",()=>({
 }))
 
 const hasher:PasswordHasher = {
-    hash: function (password: string): Promise<string> {
-        throw new Error("Function not implemented.");
-    },
+    hash: jest.fn(async()=>{})as any,
     compare: jest.fn(async()=>true)
 }
 

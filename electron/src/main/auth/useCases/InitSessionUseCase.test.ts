@@ -3,19 +3,12 @@ import { InitSessionUseCase } from "./InitSessionUseCase";
 import { IAuthRepository } from "../repositories/IAuthRepository";
 
 const repository:IAuthRepository = {
-    getUser: function (email: string, password: string): Promise<{ userID: string; } | null> {
-        throw new Error("Function not implemented.");
-    },
-    registerAutorizationCode: function (code: string, data: unknown): Promise<void> {
-        throw new Error("Function not implemented.");
-    },
-    validateAutorizationCode: function (code: string): Promise<unknown> {
-        throw new Error("Function not implemented.");
-    },
-    registerRefreshCode: function (code: string, data: unknown): Promise<void> {
-        throw new Error("Function not implemented.");
-    },
-    validateRefreshCode: jest.fn(async()=>{})
+    getUser: jest.fn(async () => { }) as any,
+    registerAutorizationCode: jest.fn(async () => { }) as any,
+    validateAutorizationCode: jest.fn(async () => { }) as any,
+    registerRefreshCode: jest.fn(async () => { }) as any,
+    validateRefreshCode: jest.fn(async () => { }),
+    registerUser: jest.fn(async()=>{})as any
 }
 const initializer = new InitSessionUseCase(repository)
 

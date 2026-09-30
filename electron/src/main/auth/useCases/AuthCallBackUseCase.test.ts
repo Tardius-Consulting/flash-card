@@ -3,17 +3,12 @@ import { IAuthRepository } from "../repositories/IAuthRepository";
 import { AuthCallBackUseCase } from "./AuthCallBackUseCase";
 
 const repository:IAuthRepository ={
-    getUser: function (email: string, password: string): Promise<{ userID: string; } | null> {
-        throw new Error("Function not implemented.");
-    },
-    registerAutorizationCode: function (code: string, data: unknown): Promise<void> {
-        throw new Error("Function not implemented.");
-    },
-    validateAutorizationCode: jest.fn(async()=>{}),
-    registerRefreshCode: jest.fn(async()=>{}),
-    validateRefreshCode: function (code: string): Promise<unknown> {
-        throw new Error("Function not implemented.");
-    }
+    getUser: jest.fn(async () => { }) as any,
+    registerAutorizationCode: jest.fn(async () => { }) as any,
+    validateAutorizationCode: jest.fn(async () => { }),
+    registerRefreshCode: jest.fn(async () => { }),
+    validateRefreshCode: jest.fn(async () => { }) as any,
+    registerUser: jest.fn(async()=>{})as any,
 }
 const generator = new AuthCallBackUseCase(repository)
 
