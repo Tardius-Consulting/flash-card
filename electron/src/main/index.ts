@@ -6,6 +6,10 @@ export function setJWT(jwt:string){
   JWT = jwt;
 }
 
+export function getJWT(){
+  return JWT;
+}
+
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
