@@ -23,8 +23,8 @@ describe("Get autorization code end try generate refresh token",()=>{
             (repository.validateAutorizationCode as jest.Mock).mockImplementationOnce(async()=>{
                 return{userID:"Mock_test"}
             })
-            let code = "Test_code"
-            let token = await generator.execute(code)
+            const code = "Test_code"
+            const token = await generator.execute(code)
             expect(token).toEqual(expect.any(String))
             expect(repository.registerRefreshCode).toHaveBeenCalledWith(expect.not.stringMatching(code),{userID:"Mock_test"})
         })

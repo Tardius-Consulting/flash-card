@@ -27,7 +27,7 @@ describe("Get refresh token and try initialize a session",()=>{
             (repository.validateRefreshCode as jest.Mock).mockImplementationOnce(async()=>{
                 return {userID:"mock_user"}
             })
-            let token = await initializer.execute("mock_refresh")
+            const token = await initializer.execute("mock_refresh")
             expect(token).toEqual(expect.any(String))
         })
     })

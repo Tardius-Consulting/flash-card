@@ -8,7 +8,7 @@ export class MockAuthRepository implements IAuthRepository{
 
     async getUser(email: string) {
         console.log(`mock auth repository com email:${email}`)
-        let data = this.users[email]
+        const data = this.users[email]
         if(data)return data
     }
     async registerUser(user: User): Promise<void> {

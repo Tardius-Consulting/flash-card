@@ -17,7 +17,7 @@ const register = new RegisterUseCase(repository,hasher)
 ipcMain.handle('auth:Login',async (event,data:{email:string,password:string})=>{
     console.log("init auth")
     try{
-        let code = login.exec(data.email,data.password)
+        const code = login.exec(data.email,data.password)
         ipcMain.emit('auth:handleAuthCallback',code)
     }catch(err){
         if(err instanceof UserNotFoundException)
@@ -32,7 +32,7 @@ ipcMain.handle('auth:initLogin',async(event)=>{
 
 ipcMain.handle('auth:handleAuthCallback',async (event,code)=>{
     try{
-        let token = await authCallback.execute(code)
+        const token = await authCallback.execute(code)
         ipcMain.emit('auth:initSession',token)
     }catch(err){
         if(err instanceof InvalidGrantException)console.log(err.message)
