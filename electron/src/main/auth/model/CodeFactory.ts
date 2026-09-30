@@ -1,7 +1,7 @@
 import * as crypto from 'crypto'
 export class CodeFactory{
     public static generateRandomCode(){
-        let tamanho = 15
+        const tamanho = 15
         const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         const valoresAleatorios = new Uint8Array(tamanho);
         crypto.getRandomValues(valoresAleatorios);

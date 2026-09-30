@@ -2,6 +2,7 @@ import { describe, it, beforeEach, expect, jest } from "@jest/globals";
 import { LoginUseCase } from "./LoginUseCase";
 import { IAuthRepository } from "../repositories/IAuthRepository";
 import { UserNotFoundException } from "./Errors/Exceptions";
+import { PasswordHasher } from "../model/IPassWordHash";
 
 const correctEmail = "correct@email.com"
 const correctPassword = "Correct"
@@ -10,11 +11,11 @@ const wrongEmail = "wrong@email.com"
 
 let usecase:LoginUseCase
 const repository:IAuthRepository = {
-    getUser: function (email: string, password: string):Promise<{userID:string}|null> {
-        const validPair = email==correctEmail && password == correctPassword
-        if(validPair) return Promise.resolve({userID:"01"})
-        return Promise.resolve(null)
-    },
+    getUser: jest.fn( async(email: string) =>{
+        const validPair = email==correctEmail
+        if(validPair) return {userID:"01",password:correctPassword}
+    }),
+    registerUser:jest.fn()as any,
     registerAutorizationCode:jest.fn() as any,
     validateAutorizationCode:async()=>{return false},
     registerRefreshCode:async()=>{},
@@ -29,11 +30,16 @@ jest.mock("../model/CodeFactory",()=>({
     }
 }))
 
+const hasher:PasswordHasher = {
+    hash: jest.fn(async()=>{})as any,
+    compare: jest.fn(async()=>true)
+}
+
 process.env.SECRET_KEY = "Secret_Test"
 
 describe('Login Use Cases tests',()=>{
     beforeEach(()=>{
-        usecase = new LoginUseCase(repository)
+        usecase = new LoginUseCase(repository,hasher)
     })
     describe("Correct path",()=>{
         it("user pass correct email-password",async()=>{
