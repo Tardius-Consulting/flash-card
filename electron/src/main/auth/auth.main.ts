@@ -3,9 +3,12 @@ import { LoginUseCase } from "./useCases/LoginUseCase.js";
 import { MockAuthRepository } from "./repositories/MockAuthRepository.js";
 import { InvalidGrantException, UserNotFoundException } from "./useCases/Errors/Exceptions.js";
 import { AuthCallBackUseCase } from "./useCases/AuthCallBackUseCase.js";
+import { InitSessionUseCase } from "./useCases/InitSessionUseCase.js";
+import { setJWT } from "../index.js";
 const repository = new MockAuthRepository()
 const login = new LoginUseCase(repository)
 const authCallback = new AuthCallBackUseCase(repository)
+const initSession = new InitSessionUseCase(repository)
 
 ipcMain.handle('auth:Login',async (event,data:{email:string,password:string})=>{
     console.log("init auth")
@@ -33,5 +36,7 @@ ipcMain.handle('auth:handleAuthCallback',async (event,code)=>{
 })
 
 ipcMain.handle('auth:initSession',async(event,token)=>{
+    const jwt = await initSession.execute(token)
+    setJWT(jwt)
     console.log("token emitido:",token)
 })

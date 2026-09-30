@@ -17,7 +17,8 @@ const repository:IAuthRepository = {
     },
     registerAutorizationCode:jest.fn() as any,
     validateAutorizationCode:async()=>{return false},
-    registerRefreshCode:async()=>{}
+    registerRefreshCode:async()=>{},
+    validateRefreshCode:async()=>{return false}
 }
 
 jest.mock("../model/CodeFactory",()=>({

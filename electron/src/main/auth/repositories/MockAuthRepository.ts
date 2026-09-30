@@ -16,4 +16,7 @@ export class MockAuthRepository implements IAuthRepository{
     async registerRefreshCode(code: string,data:unknown): Promise<void> {
         this.refreshCode = {[code]:data}
     }
+    async validateRefreshCode(code: string): Promise<unknown> {
+        return this.refreshCode[code]
+    }
 }
