@@ -5,4 +5,5 @@ export class MockAuthGateway implements IAuthGateway{
     async login(email: string, password: string) {
         console.log(`mock gateway login com email:${email} e password:${password}`)
     }
+    async me(){}
 }
