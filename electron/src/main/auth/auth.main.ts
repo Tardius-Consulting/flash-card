@@ -5,10 +5,14 @@ import { InvalidGrantException, UserNotFoundException } from "./useCases/Errors/
 import { AuthCallBackUseCase } from "./useCases/AuthCallBackUseCase.js";
 import { InitSessionUseCase } from "./useCases/InitSessionUseCase.js";
 import { setJWT } from "../index.js";
+import { RegisterUseCase } from "./useCases/RegisterUserUseCase.js";
+import { Argon2PasswordHash } from "./repositories/Argon2PasswordHash.js";
 const repository = new MockAuthRepository()
-const login = new LoginUseCase(repository)
+const hasher = new Argon2PasswordHash()
+const login = new LoginUseCase(repository,hasher)
 const authCallback = new AuthCallBackUseCase(repository)
 const initSession = new InitSessionUseCase(repository)
+const register = new RegisterUseCase(repository,hasher)
 
 ipcMain.handle('auth:Login',async (event,data:{email:string,password:string})=>{
     console.log("init auth")
@@ -39,4 +43,13 @@ ipcMain.handle('auth:initSession',async(event,token)=>{
     const jwt = await initSession.execute(token)
     setJWT(jwt)
     console.log("token emitido:",token)
+})
+
+ipcMain.handle('auth:register',async(event,data:{email:string,password:string})=>{
+    try{
+        register.execute(data.email,data.password)
+        ipcMain.emit('auth:Login',data)
+    }catch(err){
+        console.log(err)
+    }
 })
