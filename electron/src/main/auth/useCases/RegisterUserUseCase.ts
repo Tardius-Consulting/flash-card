@@ -1,6 +1,5 @@
 import { PasswordHasher } from "../model/IPassWordHash";
 import { User } from "../model/User";
-import { Argon2PasswordHash } from "../repositories/Argon2PasswordHash";
 import { IAuthRepository } from "../repositories/IAuthRepository";
 
 export class RegisterUseCase{
