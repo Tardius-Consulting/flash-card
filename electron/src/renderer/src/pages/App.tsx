@@ -32,7 +32,7 @@ export default function App() {
         <Route path='/home' element={home}>
           {SharedHomeRoutes()}
         </Route>
-        <Route path='/SignUp' element={<SignUp/>}/>
+        <Route path='/SignUp' element={<SignUp gateway={authGateway}/>}/>
     </Routes>
   );
 }

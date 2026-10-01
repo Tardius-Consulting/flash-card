@@ -9,4 +9,8 @@ export class ElectronAuthGateway implements IAuthGateway{
     async me(){
         return await window.electronAPI.me()
     }
+
+    async register(email:string,password:string): Promise<void> {
+        await window.electronAPI.register(email,password)
+    }
 }
