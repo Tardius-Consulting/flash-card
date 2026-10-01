@@ -1,12 +1,10 @@
 import React, { ChangeEvent, useState } from "react"
-import { IAuthGateway } from "../Infrastructure/IAuthGateway"
-import { useNavigate } from "react-router"
 
-export default function SignUp({gateway}:{gateway:IAuthGateway}){
+export default function InitiRegister({continueRegister}:{continueRegister:(data:{email:string,password:string})=>void}){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
-    const navigate = useNavigate()
+
     const onChangeEmail=(e:ChangeEvent<HTMLInputElement>)=>{
         const value = e.target.value
         setEmail(value)
@@ -22,21 +20,13 @@ export default function SignUp({gateway}:{gateway:IAuthGateway}){
         setPassword2(value)
     }
 
-    const onSubmit=async()=>{
-        try{
-            if(password==password2)
-                await gateway.register(email,password)
-        }catch(err){
-            if(err instanceof Error)
-            console.log(err.message)
-        }
+    const onSubmit=(e: React.SubmitEvent)=>{
+        e.preventDefault();
+        if(email!='' && password!='' && password==password2)
+            continueRegister({email,password})
     }
 
-    const onClick=()=>{
-        navigate("/Login")
-    }
-    return<div className="">
-        <form onSubmit={onSubmit} style={{
+    return<form onSubmit={onSubmit} style={{
             display:"flex",
             flexDirection:"column",
             width:"300px"
@@ -46,6 +36,7 @@ export default function SignUp({gateway}:{gateway:IAuthGateway}){
                 type="email" 
                 placeholder="Email" 
                 id="EmailField" 
+                value={email}
                 onChange={onChangeEmail}
             />
             <label htmlFor="PasswordField" style={{marginTop:"10px"}}>Senha</label>
@@ -53,20 +44,18 @@ export default function SignUp({gateway}:{gateway:IAuthGateway}){
                 placeholder="Senha" 
                 type="password"
                 id="PasswordField"
+                value={password}
                 onChange={onChangePassword}
             />
             <input 
                 placeholder="Senha" 
                 type="password"
                 id="PasswordField"
+                value={password2}
                 onChange={onChangePassword2}
             />
             <button type="submit" id="Confirmation" className="action button">
                 Entrar
             </button>
         </form>
-        <a onClick={onClick} className="button">
-            Já tenho um perfil
-        </a>
-    </div>
 }

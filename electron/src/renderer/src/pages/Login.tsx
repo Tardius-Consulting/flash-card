@@ -16,9 +16,12 @@ export default function Login({gateway}:{gateway:IAuthGateway}){
         setPassword(value)
     }
 
-    const onSubmit=()=>{
+    const onSubmit=async(e:React.SubmitEvent)=>{
+        e.preventDefault()
         try{
-            gateway.login(email,password)
+            const result = await gateway.login(email,password)
+            if(!result.ok)throw new Error(result.message)
+            navigate("/")
         }catch(err){
             if(err instanceof Error)
             console.log(err.message)

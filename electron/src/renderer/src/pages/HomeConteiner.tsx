@@ -1,21 +1,14 @@
 import { Outlet } from "react-router";
 import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router";
-import { IAuthGateway } from "../Infrastructure/IAuthGateway";
+import { useApp } from "../context/app.context";
 
-export default function HomeConteiner({gateway}:{gateway:IAuthGateway}){
-  const navigate = useNavigate()
+export default function HomeConteiner(){
+  const { me } = useApp()
   const [loading,setLoading] = useState(true)
   useEffect(()=>{
     const validator = async ()=>{
-      try{
-        const result = await gateway.me()
-        setLoading(false)
-        if(!result) navigate('/Login')
-      }catch(err){
-        console.log(err.message)
-        navigate('/Login')
-      }
+      await me()
+      setLoading(false)
     }
     validator()
   },[])

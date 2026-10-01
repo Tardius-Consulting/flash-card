@@ -15,3 +15,9 @@ export class InvalidGrantException extends BaseException{
         super(message)
     }
 }
+
+export class UnAutorizedException extends BaseException{
+    constructor(message:string='Invalid JWT token, expired or not included.'){
+        super(message)
+    }
+}
