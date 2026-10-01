@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client"
 import { BrowserRouter, Route, Routes } from "react-router"
 import Login from "./pages/Login"
 import { ElectronAuthGateway } from "./Infrastructure/ElectronAuthGateway"
-import SignUp from "./pages/SignUp/Index"
+import SignUp from "./pages/SignUp"
 
 const conteiner = document.getElementById("rootAuth")
 
