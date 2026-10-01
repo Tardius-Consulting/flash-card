@@ -4,9 +4,10 @@ import { IAuthRepository } from "../repositories/IAuthRepository";
 
 export class RegisterUseCase{
     constructor(private repository:IAuthRepository, private hasher:PasswordHasher){}
-    public async execute(email:string,password:string){
-        const hash_pass = await this.hasher.hash(password)
-        const user = User.create(email,hash_pass)
+    public async execute(data:{email:string,password:string,ask:string,answer:string}){
+        const hash_pass = await this.hasher.hash(data.password)
+        const securityAsk = {ask:data.ask,answer:await this.hasher.hash(data.answer)}
+        const user = User.create(data.email,hash_pass,securityAsk)
         this.repository.registerUser(user);
     }
 }

@@ -1,6 +1,7 @@
 import { describe, expect, it, jest } from "@jest/globals";
 import { InitSessionUseCase } from "./InitSessionUseCase";
 import { IAuthRepository } from "../repositories/IAuthRepository";
+import { ITokenFactory } from "../model/TokenFactory";
 
 const repository:IAuthRepository = {
     getUser: jest.fn(async () => { }) as any,
@@ -10,7 +11,11 @@ const repository:IAuthRepository = {
     validateRefreshCode: jest.fn(async () => { }),
     registerUser: jest.fn(async()=>{})as any
 }
-const initializer = new InitSessionUseCase(repository)
+const factory:ITokenFactory = {
+    assemble: jest.fn(()=>"jwt"),
+    verificarJWT: jest.fn()as any
+}
+const initializer = new InitSessionUseCase(repository,factory)
 
 process.env.SECRET_KEY = "Test_key"
 

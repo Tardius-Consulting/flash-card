@@ -11,7 +11,11 @@ export class CodeFactory{
             resultado += caracteres[valoresAleatorios[i] % caracteres.length];
         }
 
-        const cryptoValue = crypto.createHmac('sha256',"teste_key").update(resultado).digest()
-        return {token:resultado,cryptoToken:Buffer.from(cryptoValue).toString('base64')};
+        return {token:resultado,cryptoToken:this.encryptCode(resultado)};
+    }
+
+    public static encryptCode(code:string){
+        const cryptoValue = crypto.createHmac('sha256',"teste_key").update(code).digest()
+        return Buffer.from(cryptoValue).toString('base64')
     }
 }

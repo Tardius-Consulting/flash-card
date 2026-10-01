@@ -1,16 +1,21 @@
 import * as crypto from 'crypto';
-
-export class TokenFactory{
+export interface ITokenFactory{
+    verificarJWT:(jwt:string)=>unknown
+    assemble:(userID,data)=>string
+}
+export class TokenFactory implements ITokenFactory{
     constructor(){}
     public assemble(userID:string,meta?:unknown){
         const header = {
             alg:"HS256",
             typ:"JWT"
         }
+        const now = Math.floor(Date.now()/1000)
         const payload = {
             sub:userID,
             meta,
-            iat:Date.now()
+            iat:now,
+            exp:now+(60*15)
         }
         const encodedHeader = this.base64UrlEncode(JSON.stringify(header))
         const encodedPayload = this.base64UrlEncode(JSON.stringify(payload))

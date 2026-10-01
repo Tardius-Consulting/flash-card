@@ -1,23 +1,14 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router'
 import Login from './Login';
 import { ElectronAuthGateway } from '../Infrastructure/ElectronAuthGateway';
-import SignUp from './SignUp';
+import SignUp from './SignUp/Index';
 import HomeScreem from './Home';
 import CardsScreem from './Cards';
 import CardScreem from './Card';
 import GroupConteiner from './GroupConteiner';
 import HomeConteiner from './HomeConteiner';
-
-const SharedHomeRoutes = () => (
-  <>
-    <Route index element={<HomeScreem/>}/>
-    <Route path=':groupId' element={<GroupConteiner/>}>
-      <Route index element={<CardsScreem/>}/>
-      <Route path=':CardId' element={<CardScreem/>}/>
-    </Route>
-  </>
-);
+import { AppProvider } from '../context/app.context';
 
 export default function App() {
 
@@ -25,13 +16,17 @@ export default function App() {
   return (
     <Routes>
         <Route path='/Login' element={<Login gateway={authGateway}/>}/>
-        <Route path='/' element={<HomeConteiner/>}>
-          {SharedHomeRoutes()}
+        <Route path='/' element={<AppProvider gateway={authGateway}>
+            <HomeConteiner/>
+          </AppProvider>
+        }>
+          <Route index element={<HomeScreem/>}/>
+          <Route path=':groupId' element={<GroupConteiner/>}>
+            <Route index element={<CardsScreem/>}/>
+            <Route path=':CardId' element={<CardScreem/>}/>
+          </Route>
         </Route>
-        <Route path='/home' element={<HomeConteiner/>}>
-          {SharedHomeRoutes()}
-        </Route>
-        <Route path='/SignUp' element={<SignUp/>}/>
+        <Route path='/SignUp' element={<SignUp gateway={authGateway}/>}/>
     </Routes>
   );
 }

@@ -1,8 +1,22 @@
-import { Outlet } from "react-router-dom";
-import React from "react"
+import { Outlet } from "react-router";
+import React, { useEffect, useState } from "react"
+import { useApp } from "../context/app.context";
 
 export default function HomeConteiner(){
-    return <>
-        <Outlet/>
-    </>
+  const { me } = useApp()
+  const [loading,setLoading] = useState(true)
+  useEffect(()=>{
+    const validator = async ()=>{
+      await me()
+      setLoading(false)
+    }
+    validator()
+  },[])
+
+  if(loading) return(<div>
+    <p>loading</p>
+  </div>)
+  return <>
+    <Outlet/>
+  </>
 }
