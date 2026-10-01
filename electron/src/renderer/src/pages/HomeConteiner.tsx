@@ -8,20 +8,22 @@ export default function HomeConteiner({gateway}:{gateway:IAuthGateway}){
   const [loading,setLoading] = useState(true)
   useEffect(()=>{
     const validator = async ()=>{
-        try{
-            let result = await gateway.me()
-            setLoading(false)
-            if(!result) navigate('/Login')
-        }catch(err){
-            navigate('/Login')
-        }
+      try{
+        const result = await gateway.me()
+        setLoading(false)
+        if(!result) navigate('/Login')
+      }catch(err){
+        console.log(err.message)
+        navigate('/Login')
+      }
     }
     validator()
   },[])
+
   if(loading) return(<div>
     <p>loading</p>
   </div>)
-    return <>
-        <Outlet/>
-    </>
+  return <>
+    <Outlet/>
+  </>
 }

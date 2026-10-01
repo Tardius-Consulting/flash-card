@@ -16,7 +16,7 @@ const initSession = new InitSessionUseCase(repository)
 const register = new RegisterUseCase(repository,hasher)
 
 ipcMain.handle('auth:Login',async (event,data:{email:string,password:string})=>{
-    let result = await handleLogin(data)
+    const result = await handleLogin(data)
     event.sender.send("render:authResult",result)
 })
 
