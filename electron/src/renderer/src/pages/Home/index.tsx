@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import React, { useEffect, useState } from "react"
-import { useApp } from "../context/app.context";
+import { useApp } from "../../context/app.context";
 
 export default function HomeConteiner(){
   const { me } = useApp()

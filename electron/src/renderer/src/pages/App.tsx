@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Routes } from 'react-router'
 import Login from './Login';
 import { ElectronAuthGateway } from '../Infrastructure/ElectronAuthGateway';
-import SignUp from './SignUp/Index';
-import HomeScreem from './Home';
-import CardsScreem from './Cards';
-import CardScreem from './Card';
-import GroupConteiner from './GroupConteiner';
-import HomeConteiner from './HomeConteiner';
+import SignUp from './SignUp';
+import HomeScreem from './Home/Home';
+import CardsScreem from './Home/Group/Group';
+import CardScreem from './Home/Group/Card';
+import GroupConteiner from './Home/Group';
+import HomeConteiner from './Home';
 import { AppProvider } from '../context/app.context';
 
 export default function App() {

@@ -13,4 +13,16 @@ export class ElectronAuthGateway implements IAuthGateway{
     async register(data:{email:string,password:string,ask:string,answer:string}) {
         return await window.electronAPI.register(data)
     }
+
+    async getAsk(email: string): Promise<string> {
+        return await window.electronAPI.getAsk(email)
+    }
+
+    async validateAnswer(answer: string): Promise<boolean> {
+        return await window.electronAPI.validateAnswer(answer)
+    }
+
+    async submitPasswordChange(password: string): Promise<{ ok: boolean; message: string; }> {
+        return await window.electronAPI.submitPasswordChange(password)
+    }
 }

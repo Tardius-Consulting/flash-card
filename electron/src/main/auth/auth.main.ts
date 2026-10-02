@@ -4,13 +4,14 @@ import { MockAuthRepository } from "./repositories/MockAuthRepository.js";
 import { InvalidGrantException, UnAutorizedException, UserNotFoundException } from "./useCases/Errors/Exceptions.js";
 import { AuthCallBackUseCase } from "./useCases/AuthCallBackUseCase.js";
 import { InitSessionUseCase } from "./useCases/InitSessionUseCase.js";
-import { getJWT, setJWT } from "../index.js";
+import { getChalengeID, getJWT, getResetToken, setChalengeID, setJWT, setResetToken } from "../index.js";
 import { RegisterUseCase } from "./useCases/RegisterUserUseCase.js";
 import { Argon2PasswordHash } from "./repositories/Argon2PasswordHash.js";
 import { abrirJanelaDeLogin } from "./login.window.js";
 import { TokenFactory } from "./model/TokenFactory.js";
 import { validateJWTUseCase } from "./useCases/ValidateJWTUseCase.js";
 import Store from 'electron-store';
+import { ChangePasswordUseCase } from "./useCases/ChangePasswordUseCase.js";
 
 const repository = new MockAuthRepository()
 const hasher = new Argon2PasswordHash()
@@ -21,6 +22,7 @@ const initSession = new InitSessionUseCase(repository,factory)
 const register = new RegisterUseCase(repository,hasher)
 const validateJWT = new validateJWTUseCase(factory)
 const store = new (Store as any).default()
+const changePassword = new ChangePasswordUseCase(repository,hasher)
 
 
 ipcMain.handle('auth:Login',async (event,data:{email:string,password:string})=>{
@@ -127,3 +129,31 @@ async function validateSession() {
         return {ok:false, message:err.message}
     }
 }
+
+ipcMain.handle("auth:changePassword",async (event,password)=>{
+    try{
+        const token = getResetToken()
+        await changePassword.change(password,token)
+        return {ok:true,message:"Senha alterada com sucesso!"}
+    }catch(err){
+        return{ok:false,message:err.message}
+    }
+})
+
+ipcMain.handle("auth:getSecurityAsk",async (event,email:string)=>{
+    const ask = await changePassword.getSecurityQuestion(email)
+    setChalengeID(ask.chalenge_id)
+    return ask
+})
+
+ipcMain.handle('auth:validateAnswer',async(event,answer:string)=>{
+    try{
+        const chalenge_id = getChalengeID()
+        const result = await changePassword.validateAnswer(answer,chalenge_id)
+        setResetToken(result)
+        return true;
+    }catch(err){
+        console.log(err)
+        return false
+    }
+})

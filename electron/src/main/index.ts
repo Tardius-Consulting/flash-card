@@ -1,6 +1,24 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'node:path';
 
+let RESET_TOKEN:string;
+export function setResetToken(id:string){
+  RESET_TOKEN = id
+}
+
+export function getResetToken(){
+  return RESET_TOKEN
+}
+
+let CHALENGE_ID:string;
+export function setChalengeID(id:string){
+  CHALENGE_ID = id
+}
+
+export function getChalengeID(){
+  return CHALENGE_ID
+}
+
 let JWT:string;
 export function setJWT(jwt:string){
   JWT = jwt;
