@@ -3,6 +3,9 @@ export interface IAuthAPI{
     me():Promise<{ok:boolean,message:string}>
     register(data:{email:string,password:string,ask:string,answer:string}):Promise<{ok:boolean,message:string}>
     openLogin():Promise<void>
+    getAsk(email:string):Promise<string>
+    validateAnswer(answer:string):Promise<boolean>
+    submitPasswordChange(password:string):Promise<{ok:boolean,message:string}>
 }
 
 export interface IRendererAPI{

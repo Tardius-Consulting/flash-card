@@ -1,6 +1,6 @@
 import { type ChangeEvent, useState } from "react"
 import React from "react"
-import type{ IAuthGateway } from "../Infrastructure/IAuthGateway.js"
+import type{ IAuthGateway } from "../../Infrastructure/IAuthGateway.js"
 import { useNavigate } from "react-router"
 
 export default function Login({gateway}:{gateway:IAuthGateway}){
