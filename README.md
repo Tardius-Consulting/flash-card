@@ -19,6 +19,7 @@ O sitema possui, até o momento, as seguintes funcionalidades a serem implementa
 ### Autenticação
 - Login 
 - Cadastro
+- Recuperação de senha
 
 O sitema terá um login e cadastro, já que o sistema pode ser usado em computadores, diferêntes usuários pessoais podem querer usar o app, por exemplo, irmãos, pais que estão estudano, outros parêntes da casa.
 Assim o sistema terá um sistema de login para dividir os perfis de usuário que estão no app atualmente, permitindo personalização individual dos cartões, grupos e planos de estudo.
