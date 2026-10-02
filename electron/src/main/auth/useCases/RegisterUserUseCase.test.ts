@@ -20,7 +20,15 @@ const hasher:PasswordHasher={
 const register = new RegisterUseCase(repository,hasher)
 describe("",()=>{
     it("",async()=>{
-        await register.execute("email","senha")
-        expect(repository.registerUser).toHaveBeenCalledWith({_email:"email",_id:expect.any(String),_password:"hash_senha"}as any)
+        await register.execute({email:"email",password:"senha",ask:"ask",answer:"answer"})
+        expect(repository.registerUser).toHaveBeenCalledWith({
+            _email:"email",
+            _id:expect.any(String),
+            _password:"hash_senha",
+            _securityAsk:{
+                ask:"ask",
+                answer:"hash_answer"
+            }
+        }as any)
     })
 })
