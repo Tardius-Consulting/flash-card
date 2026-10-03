@@ -8,14 +8,14 @@ export class UserRepository implements IUserRepository {
         const user = _user.toState()
         const query = `INSERT INTO users (id, name, email, password, security_question, security_answer) VALUES (?, ?, ?, ?, ?, ?)`
         const name = user.email.substring(0, user.email.indexOf('@'))
-        await this._db.run(query, [
+        await this._db.prepare(query).run(
             user.id, 
             name, 
             user.email, 
             user.password,
             user.ask,
             user.answer
-        ])
+        )
     }
     getUser(email: string): Promise<unknown | null> {
         const query = `SELECT * FROM users WHERE email = ?`
