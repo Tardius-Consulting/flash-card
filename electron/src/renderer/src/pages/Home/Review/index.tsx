@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useReviewContext } from "../../../context/Review.context"
-import { ReviewState } from "../../../Infrastructure/IReviewRepository"
+import { FinishScreen } from "./FinishScreen"
+import { Card } from "./Card"
 
 export function ReviewScreem(){
     const { saveProcess, list, definedList } = useReviewContext()
@@ -29,56 +30,4 @@ export function ReviewScreem(){
         setCard(<Card index={index} handleNext={handleNext} card={list[index]}/>)
     },[definedList])
     return card
-}
-
-function Card({index,handleNext,card}:{index:number,handleNext:(index:number,status:boolean)=>void,card:ReviewState}){
-    const [showQuestion,setShowQuestion] = useState(true)
-    
-    return<div style={{
-        display:"flex", 
-        flexDirection:"column", 
-        gap:"1rem"
-    }} onClick={(e)=>{
-        e.stopPropagation()
-        setShowQuestion(false)
-    }}>
-        <div>
-            <h3>{showQuestion ? "Pergunta" : "Resposta "+(index+1)}</h3>
-        </div>
-        <div>
-            <p>{showQuestion ? card.ask : card.answer}</p>
-        </div>
-        {showQuestion ? 
-            <p>Clique para ver a resposta</p>
-            :
-            <>
-                <button onClick={(e)=>{
-                    e.stopPropagation()
-                    e.preventDefault()
-                    handleNext(index,true)
-                    setShowQuestion(true)
-                }}>Acertei</button>
-                <button onClick={(e)=>{
-                    e.stopPropagation()
-                    e.preventDefault()
-                    handleNext(index,false)
-                    setShowQuestion(true)
-                }}>Errei</button>
-            </>
-        }
-    </div>
-}
-
-function FinishScreen(){
-    const { finishProcess,list } = useReviewContext()
-    useEffect(()=>{
-        finishProcess()
-    },[])
-    const quantity = list.length
-    const correct = list.filter((card) => card.status).length
-    return<div>
-        <h3>Fim do processo de revisão</h3>
-        <p>Você revisou {quantity} cartões</p>
-        <p>Você acertou {Math.round(correct/quantity * 100)}% dos cartões</p>
-    </div>
 }
