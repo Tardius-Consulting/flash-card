@@ -1,11 +1,13 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { IReviewRepository, ReviewState } from "../Infrastructure/IReviewRepository";
 import { ElectronReviewGateway } from "../Infrastructure/ElectronReviewGateway";
+import { useParams } from "react-router";
 
 interface ReviewInterface{
     saveProcess:(index:number, status:boolean)=>Promise<void>
     finishProcess:()=>Promise<void>
     list:ReviewState[]
+    definedList:boolean
 }
 
 const ReviewContext = createContext<ReviewInterface|null>(null)
@@ -13,7 +15,22 @@ const ReviewContext = createContext<ReviewInterface|null>(null)
 export function ReviewProvider({children,repository}:{children:React.ReactNode,repository:IReviewRepository}){
 
     const gateway = new ElectronReviewGateway()
-    const [list,setList] = useState<ReviewState[]>([])
+    const [list,setList] = useState<ReviewState[]>()
+    const [definedList,setDefinedList] = useState(false)
+    const {groupID} = useParams()
+
+    useEffect(()=>{
+        const loadState = async()=>{
+            let state = await repository.loadState()
+            if(!state) {
+                state = await gateway.loadReview(groupID)
+                await repository.saveState(state)
+            }
+            setList(state)
+            setDefinedList(true)
+        }
+        loadState()
+    },[])
 
     const saveProcess = async (index:number, status:boolean)=>{
         const card = list[index]
@@ -31,7 +48,8 @@ export function ReviewProvider({children,repository}:{children:React.ReactNode,r
     const value:ReviewInterface = {
         saveProcess,
         finishProcess,
-        list
+        list,
+        definedList
     }
     return<ReviewContext.Provider value={value}>
         {children}

@@ -50,7 +50,7 @@ export class WebReviewRepository implements IReviewRepository{
     async removeState(): Promise<void> {
         const db = await this._openDB();
         await new Promise((resolve, reject) => {
-            const transaction = db.transaction(this.storeName, 'readonly');
+            const transaction = db.transaction(this.storeName, 'readwrite');
             const store = transaction.objectStore(this.storeName);
             
             const request = store.delete(this.key);

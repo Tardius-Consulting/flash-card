@@ -17,9 +17,10 @@ export default function App() {
 
   const authGateway = new ElectronAuthGateway()
   const repository = new WebReviewRepository()
+  
   return (
     <Routes>
-      <Route path='/Review' element={<ReviewProvider repository={repository}>
+      <Route path='/Review/:groupID' element={<ReviewProvider repository={repository}>
           <ReviewScreem/>
         </ReviewProvider>
       }/>

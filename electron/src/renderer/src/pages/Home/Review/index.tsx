@@ -3,7 +3,7 @@ import { useReviewContext } from "../../../context/Review.context"
 import { ReviewState } from "../../../Infrastructure/IReviewRepository"
 
 export function ReviewScreem(){
-    const { saveProcess, list } = useReviewContext()
+    const { saveProcess, list, definedList } = useReviewContext()
     const [card,setCard] = useState(<></>)
     const handleNext = async(index:number,status:boolean)=>{
         await saveProcess(index,status)
@@ -15,19 +15,33 @@ export function ReviewScreem(){
         )
     }
     useEffect(()=>{
-        setCard(<Card index={0} handleNext={handleNext} card={list[0]}/>)
-    },[])
+        if(!definedList) return
+        let index = 0
+        console.log("Lista de revisão: ",list)
+        while(index < list.length && list[index].status !== null){
+            console.log("Pulando cartão ",index," pois possui status ",list[index].status)
+            index++
+        }
+        if(index >= list.length){
+            setCard(<FinishScreen/>)
+            return
+        }
+        setCard(<Card index={index} handleNext={handleNext} card={list[index]}/>)
+    },[definedList])
     return card
 }
 
 function Card({index,handleNext,card}:{index:number,handleNext:(index:number,status:boolean)=>void,card:ReviewState}){
     const [showQuestion,setShowQuestion] = useState(true)
-    if(showQuestion)
+    
     return<div style={{
         display:"flex", 
         flexDirection:"column", 
         gap:"1rem"
-    }} onClick={()=>setShowQuestion(false)}>
+    }} onClick={(e)=>{
+        e.stopPropagation()
+        setShowQuestion(false)
+    }}>
         <div>
             <h3>{showQuestion ? "Pergunta" : "Resposta "+(index+1)}</h3>
         </div>
@@ -38,8 +52,18 @@ function Card({index,handleNext,card}:{index:number,handleNext:(index:number,sta
             <p>Clique para ver a resposta</p>
             :
             <>
-                <button onClick={()=>handleNext(index,true)}>Acertei</button>
-                <button onClick={()=>handleNext(index,false)}>Errei</button>
+                <button onClick={(e)=>{
+                    e.stopPropagation()
+                    e.preventDefault()
+                    handleNext(index,true)
+                    setShowQuestion(true)
+                }}>Acertei</button>
+                <button onClick={(e)=>{
+                    e.stopPropagation()
+                    e.preventDefault()
+                    handleNext(index,false)
+                    setShowQuestion(true)
+                }}>Errei</button>
             </>
         }
     </div>
