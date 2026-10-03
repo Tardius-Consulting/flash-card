@@ -3,3 +3,4 @@ import { initAuthDB } from "./auth/db.auth"
 
 const db = new Database("auth.sqlite")
 initAuthDB(db)
+export default db

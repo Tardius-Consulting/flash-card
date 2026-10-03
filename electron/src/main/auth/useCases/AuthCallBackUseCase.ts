@@ -1,9 +1,10 @@
 import { CodeFactory } from "../model/CodeFactory";
 import { IAuthRepository } from "../repositories/IAuthRepository";
+import { ITokenRepository } from "../repositories/ITokenRepository";
 import { InvalidGrantException } from "./Errors/Exceptions";
 
 export class AuthCallBackUseCase{
-    constructor(private repository:IAuthRepository){}
+    constructor(private repository:ITokenRepository){}
     public async execute(code:string){
         const encryptCode = CodeFactory.encryptCode(code)
         const isValid = await this.repository.validateAutorizationCode(encryptCode)
