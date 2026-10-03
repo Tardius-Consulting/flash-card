@@ -1,0 +1,39 @@
+import { Card } from "../../card/model/Card";
+import { Review } from "./Review";
+
+export class ReviewList {
+    private _cards: Card[];
+    private constructor(cards: Card[]) {
+        this._cards = this.shuffleCards(cards);
+    }
+
+    private shuffleCards(array: Card[]): Card[] {
+        // Cria uma cópia para não modificar a lista original
+        const shuffled = [...array];
+        
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            // Escolhe um índice aleatório entre 0 e i, onde i é o ultimo incice que pode ser alterado
+            const j = Math.floor(Math.random() * (i + 1));
+            
+            // inclui um ítem aleatório [j] na ultima posição da lista [i]
+            // continuando o processo até que todos os itens tenham sido embaralhados
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        
+        return shuffled;
+    }
+
+    public static async create(promiseCards: Promise<Card[]>): Promise<ReviewList> {
+        const cards = await promiseCards;
+        return new ReviewList(cards);
+    }
+
+    public get cards(): Review[] {
+        return this._cards.map((card) => ({
+            id: card.id,
+            status: null,
+            ask: card.ask,
+            answer: card.answer
+        }));
+    }
+}
