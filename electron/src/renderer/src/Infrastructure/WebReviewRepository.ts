@@ -22,7 +22,7 @@ export class WebReviewRepository implements IReviewRepository{
             };
         });
     }
-    async saveState(value: ReviewState){
+    async saveState(value: ReviewState[]){
         const db = await this._openDB();
         await new Promise((resolve, reject) => {
             const transaction = db.transaction(this.storeName, 'readwrite');
@@ -34,7 +34,7 @@ export class WebReviewRepository implements IReviewRepository{
             request.onerror = () => reject(request.error);
         });
     }
-    async loadState(): Promise<ReviewState | null> {
+    async loadState(): Promise<ReviewState[] | null> {
         const db = await this._openDB();
         return await new Promise((resolve, reject) => {
             const transaction = db.transaction(this.storeName, 'readonly');
