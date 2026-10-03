@@ -8,7 +8,7 @@ export interface IAuthAPI{
     submitPasswordChange(password:string):Promise<{ok:boolean,message:string}>
 }
 
-export interface IReviewAPI{
+export interface ICardAPI{
     registerReview(groupID:string,cards:ConcludeReviewDTO[]):Promise<void>
     getReviewList(groupID:string):Promise<ReviewState[]>
 }

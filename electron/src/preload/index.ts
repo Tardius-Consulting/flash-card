@@ -3,12 +3,12 @@
 import { contextBridge, ipcRenderer } from "electron"
 import auth from "./auth.preload.js"
 import review from "./review.preload.js"
-import type { IElectronAPI, IRendererAPI, IReviewAPI } from "../types/electron.js"
+import type { IElectronAPI, IRendererAPI, ICardAPI } from "../types/electron.js"
 const api:IElectronAPI = {
     ...auth
 }
 
-const reviewAPI:IReviewAPI = {
+const reviewAPI:ICardAPI = {
     ...review
 }
 
