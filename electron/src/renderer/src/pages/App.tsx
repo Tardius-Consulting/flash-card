@@ -17,7 +17,7 @@ export default function App() {
 
   const authGateway = new ElectronAuthGateway()
   const repository = new WebReviewRepository()
-  
+
   return (
     <Routes>
       <Route path='/Review/:groupID' element={<ReviewProvider repository={repository}>
@@ -29,7 +29,7 @@ export default function App() {
           <HomeConteiner/>
         </AppProvider>
       }>
-        <Route index element={<HomeScreem/>}/>
+        <Route index element={<HomeScreem reviewRepository={repository}/>}/>
         <Route path=':groupId' element={<GroupConteiner/>}>
           <Route index element={<CardsScreem/>}/>
           <Route path=':CardId' element={<CardScreem/>}/>

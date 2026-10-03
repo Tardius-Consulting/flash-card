@@ -59,4 +59,9 @@ export class WebReviewRepository implements IReviewRepository{
             request.onerror = () => reject(request.error);
         });
     }
+
+    async validateState(): Promise<boolean> {
+        const state = await this.loadState();
+        return !!state;
+    }
 }
