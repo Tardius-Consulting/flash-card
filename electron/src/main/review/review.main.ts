@@ -1,4 +1,9 @@
 import { ipcMain } from "electron";
+import { MockCardRepository } from "../card/repository/MockCardRepository";
+import { GetReviewListUseCase } from "./useCases/GetReviewListUseCase";
+
+const cardRepository = new MockCardRepository();
+const getReviewListUseCase = new GetReviewListUseCase(cardRepository);
  
 ipcMain.handle('review:register', async (event, { groupID, correct, total }) => {
     console.log(`Registering review for groupID: ${groupID}, correct: ${correct}, total: ${total}`);
@@ -7,36 +12,5 @@ ipcMain.handle('review:register', async (event, { groupID, correct, total }) => 
 
 ipcMain.handle('review:getList', async (event, groupID: string) => {
     console.log('Fetching review list for groupID:', groupID);
-        return [
-            {
-                "id": "1",
-                "status": null,
-                "ask": "O que é inteligência artificial?",
-                "answer": "É a capacidade de máquinas simularem a inteligência humana para resolver problemas e tomar decisões."
-            },
-            {
-                "id": "2",
-                "status": null,
-                "ask": "Qual é a capital do Brasil?",
-                "answer": "Brasília."
-            },
-            {
-                "id": "3",
-                "status": null,
-                "ask": "Quantos continentes existem no mundo?",
-                "answer": "Existem 6 continentes de acordo com o modelo mais utilizado no Brasil (África, América, Antártica, Ásia, Europa e Oceania)."
-            },
-            {
-                "id": "4",
-                "status": null,
-                "ask": "O que significa a sigla HTML?",
-                "answer": "HyperText Markup Language (Linguagem de Marcação de Hipertexto)."
-            },
-            {
-                "id": "5",
-                "status": null,
-                "ask": "Quem escreveu Dom Casmurro?",
-                "answer": "Machado de Assis."
-            }
-        ]
+    return await getReviewListUseCase.execute('teste_id', groupID);
 })
