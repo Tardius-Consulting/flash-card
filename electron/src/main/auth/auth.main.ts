@@ -12,6 +12,7 @@ import { TokenFactory } from "./model/TokenFactory.js";
 import { validateJWTUseCase } from "./useCases/ValidateJWTUseCase.js";
 import Store from 'electron-store';
 import { ChangePasswordUseCase } from "./useCases/ChangePasswordUseCase.js";
+import { validateSession } from "../shared/ValidateSession.js";
 
 const repository = new MockAuthRepository()
 const hasher = new Argon2PasswordHash()
@@ -103,9 +104,7 @@ async function generateSession(refresh:string){
 
 ipcMain.handle('auth:me',async()=>{
     try{
-        const result = await validateSession()
-        if(!result.ok) throw new UnAutorizedException()
-        return{ok:true,message:"err.message"};
+        await validateSession(()=>(Promise.resolve()))
     }catch(err){
         if(err instanceof UnAutorizedException)
         try{
@@ -119,16 +118,6 @@ ipcMain.handle('auth:me',async()=>{
         else return{ok:false,message:err.message}
     }
 })
-
-async function validateSession() {
-    try{
-        const jwt = getJWT()
-        const data = validateJWT.execute(jwt)
-        return{ok:true,message:"Sessão validada",data}
-    }catch(err){
-        return {ok:false, message:err.message}
-    }
-}
 
 ipcMain.handle("auth:changePassword",async (event,password)=>{
     try{
