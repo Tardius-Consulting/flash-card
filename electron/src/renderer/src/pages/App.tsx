@@ -9,24 +9,37 @@ import CardScreem from './Home/Group/Card';
 import GroupConteiner from './Home/Group';
 import HomeConteiner from './Home';
 import { AppProvider } from '../context/app.context';
+import { ReviewScreem } from './Home/Review';
+import { ReviewProvider } from '../context/Review.context';
+import { WebReviewRepository } from '../Infrastructure/WebReviewRepository';
 
 export default function App() {
 
   const authGateway = new ElectronAuthGateway()
+  const repository = new WebReviewRepository()
+
   return (
     <Routes>
-        <Route path='/Login' element={<Login gateway={authGateway}/>}/>
-        <Route path='/' element={<AppProvider gateway={authGateway}>
-            <HomeConteiner/>
-          </AppProvider>
-        }>
-          <Route index element={<HomeScreem/>}/>
-          <Route path=':groupId' element={<GroupConteiner/>}>
-            <Route index element={<CardsScreem/>}/>
-            <Route path=':CardId' element={<CardScreem/>}/>
-          </Route>
+      <Route path='/Review/:groupID' element={<ReviewProvider repository={repository}>
+          <ReviewScreem/>
+        </ReviewProvider>
+      }/>
+      <Route path='/Review' element={<ReviewProvider repository={repository}>
+          <ReviewScreem/>
+        </ReviewProvider>
+      }/>
+      <Route path='/Login' element={<Login gateway={authGateway}/>}/>
+      <Route path='/' element={<AppProvider gateway={authGateway}>
+          <HomeConteiner/>
+        </AppProvider>
+      }>
+        <Route index element={<HomeScreem reviewRepository={repository}/>}/>
+        <Route path=':groupId' element={<GroupConteiner/>}>
+          <Route index element={<CardsScreem/>}/>
+          <Route path=':CardId' element={<CardScreem/>}/>
         </Route>
-        <Route path='/SignUp' element={<SignUp gateway={authGateway}/>}/>
+      </Route>
+      <Route path='/SignUp' element={<SignUp gateway={authGateway}/>}/>
     </Routes>
   );
 }

@@ -1,33 +1,38 @@
 import { ipcMain, safeStorage } from "electron";
 import { LoginUseCase } from "./useCases/LoginUseCase.js";
-import { MockAuthRepository } from "./repositories/MockAuthRepository.js";
 import { InvalidGrantException, UnAutorizedException, UserNotFoundException } from "./useCases/Errors/Exceptions.js";
 import { AuthCallBackUseCase } from "./useCases/AuthCallBackUseCase.js";
 import { InitSessionUseCase } from "./useCases/InitSessionUseCase.js";
-import { getChalengeID, getJWT, getResetToken, setChalengeID, setJWT, setResetToken } from "../index.js";
+import { getChalengeID, getResetToken, setChalengeID, setJWT, setResetToken } from "../index.js";
 import { RegisterUseCase } from "./useCases/RegisterUserUseCase.js";
 import { Argon2PasswordHash } from "./repositories/Argon2PasswordHash.js";
 import { abrirJanelaDeLogin } from "./login.window.js";
 import { TokenFactory } from "./model/TokenFactory.js";
-import { validateJWTUseCase } from "./useCases/ValidateJWTUseCase.js";
 import Store from 'electron-store';
 import { ChangePasswordUseCase } from "./useCases/ChangePasswordUseCase.js";
+import { validateSession } from "../shared/ValidateSession.js";
+import { UserRepository } from "./repositories/UserRepository.js";
+import db from "../db.js";
+import { TokenRepository } from "./repositories/TokenRepository.js";
 
-const repository = new MockAuthRepository()
+const store = new (Store as any).default()
+
+const userRepository = new UserRepository(db)
+const tokenRepository = new TokenRepository(store)
+
 const hasher = new Argon2PasswordHash()
 const factory = new TokenFactory()
-const login = new LoginUseCase(repository,hasher)
-const authCallback = new AuthCallBackUseCase(repository)
-const initSession = new InitSessionUseCase(repository,factory)
-const register = new RegisterUseCase(repository,hasher)
-const validateJWT = new validateJWTUseCase(factory)
-const store = new (Store as any).default()
-const changePassword = new ChangePasswordUseCase(repository,hasher)
+
+const login = new LoginUseCase(userRepository,tokenRepository,hasher)
+const authCallback = new AuthCallBackUseCase(tokenRepository)
+const initSession = new InitSessionUseCase(tokenRepository,factory)
+const register = new RegisterUseCase(userRepository,hasher)
+const changePassword = new ChangePasswordUseCase(userRepository,tokenRepository,hasher)
 
 
 ipcMain.handle('auth:Login',async (event,data:{email:string,password:string})=>{
     const result = await handleLogin(data)
-    event.sender.send("render:authResult",result)
+    return result
 })
 
 ipcMain.handle('auth:register',async(event,data:{email:string,password:string,ask:string,answer:string})=>{
@@ -103,9 +108,7 @@ async function generateSession(refresh:string){
 
 ipcMain.handle('auth:me',async()=>{
     try{
-        const result = await validateSession()
-        if(!result.ok) throw new UnAutorizedException()
-        return{ok:true,message:"err.message"};
+        await validateSession(()=>(Promise.resolve()))
     }catch(err){
         if(err instanceof UnAutorizedException)
         try{
@@ -119,16 +122,6 @@ ipcMain.handle('auth:me',async()=>{
         else return{ok:false,message:err.message}
     }
 })
-
-async function validateSession() {
-    try{
-        const jwt = getJWT()
-        const data = validateJWT.execute(jwt)
-        return{ok:true,message:"Sessão validada",data}
-    }catch(err){
-        return {ok:false, message:err.message}
-    }
-}
 
 ipcMain.handle("auth:changePassword",async (event,password)=>{
     try{

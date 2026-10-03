@@ -39,7 +39,7 @@ process.env.SECRET_KEY = "Secret_Test"
 
 describe('Login Use Cases tests',()=>{
     beforeEach(()=>{
-        usecase = new LoginUseCase(repository,hasher)
+        usecase = new LoginUseCase(repository,repository,hasher)
     })
     describe("Correct path",()=>{
         it("user pass correct email-password",async()=>{
