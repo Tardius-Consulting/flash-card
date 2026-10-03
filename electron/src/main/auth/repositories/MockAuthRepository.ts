@@ -27,15 +27,13 @@ export class MockAuthRepository implements IAuthRepository{
         this.autorizationCode = {[code]:data};
     }
     async validateAutorizationCode(code:string):Promise<unknown>{
-        const key = CodeFactory.encryptCode(code)
-        return this.autorizationCode[key]
+        return this.autorizationCode[code]
     }
     async registerRefreshCode(code: string,data:unknown): Promise<void> {
         this.refreshCode = {[code]:data}
     }
     async validateRefreshCode(code: string): Promise<unknown> {
-        const key = CodeFactory.encryptCode(code)
-        return this.refreshCode[key]
+        return this.refreshCode[code]
     }
 
     async registerResetCode(code: string, userID: string): Promise<void> {

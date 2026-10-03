@@ -23,8 +23,7 @@ export class TokenRepository implements ITokenRepository{
         this.store.set("_Refresh_Code",{[code]:data});
     }
     async validateRefreshCode(code: string): Promise<unknown> {
-        const key = CodeFactory.encryptCode(code)
-        return this.store.get("_Refresh_Code")?.[key];
+        return this.store.get("_Refresh_Code")?.[code];
     }
 
     async registerResetCode(code: string, userID: string): Promise<void> {
