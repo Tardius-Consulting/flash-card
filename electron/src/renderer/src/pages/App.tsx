@@ -24,6 +24,10 @@ export default function App() {
           <ReviewScreem/>
         </ReviewProvider>
       }/>
+      <Route path='/Review' element={<ReviewProvider repository={repository}>
+          <ReviewScreem/>
+        </ReviewProvider>
+      }/>
       <Route path='/Login' element={<Login gateway={authGateway}/>}/>
       <Route path='/' element={<AppProvider gateway={authGateway}>
           <HomeConteiner/>

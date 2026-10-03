@@ -42,7 +42,7 @@ export function ReviewProvider({children,repository}:{children:React.ReactNode,r
 
     const finishProcess = async ()=>{
         const state = await repository.loadState()
-        await gateway.registerReview(state)
+        await gateway.registerReview(groupID, state)
         await repository.removeState();
     }
     const value:ReviewInterface = {

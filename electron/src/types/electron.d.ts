@@ -8,6 +8,11 @@ export interface IAuthAPI{
     submitPasswordChange(password:string):Promise<{ok:boolean,message:string}>
 }
 
+export interface IReviewAPI{
+    registerReview(groupID:string,correct:number,total:number):Promise<void>
+    getReviewList(groupID:string):Promise<ReviewState[]>
+}
+
 export interface IRendererAPI{
     onLogin(callback:(data)=>void):void
 }
@@ -17,6 +22,7 @@ export type IElectronAPI = IAuthAPI
 declare global{
     interface Window{
         electronAPI:IElectronAPI,
-        rendererAPI:IRendererAPI
+        rendererAPI:IRendererAPI,
+        reviewAPI:IReviewAPI
     }
 }
