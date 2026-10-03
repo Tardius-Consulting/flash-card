@@ -1,12 +1,14 @@
 import { ipcMain } from "electron";
 import { MockCardRepository } from "../card/repository/MockCardRepository";
 import { GetReviewListUseCase } from "./useCases/GetReviewListUseCase";
+import { RegisterReviewUseCase } from "./useCases/RegisterReviewUseCase";
 
 const cardRepository = new MockCardRepository();
 const getReviewListUseCase = new GetReviewListUseCase(cardRepository);
+const registerReviewUseCase = new RegisterReviewUseCase(cardRepository);
  
-ipcMain.handle('review:register', async (event, { groupID, correct, total }) => {
-    console.log(`Registering review for groupID: ${groupID}, correct: ${correct}, total: ${total}`);
+ipcMain.handle('review:register', async (event, groupID, cards) => {
+    await registerReviewUseCase.execute('teste_id', cards);
     return { ok: true, message: 'Review registered successfully' };
 });
 

@@ -9,7 +9,7 @@ export interface IAuthAPI{
 }
 
 export interface IReviewAPI{
-    registerReview(groupID:string,correct:number,total:number):Promise<void>
+    registerReview(groupID:string,cards:ConcludeReviewDTO[]):Promise<void>
     getReviewList(groupID:string):Promise<ReviewState[]>
 }
 

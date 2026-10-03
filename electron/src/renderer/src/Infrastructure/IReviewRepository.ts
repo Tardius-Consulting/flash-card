@@ -1,6 +1,7 @@
 export interface ReviewState{
     id:string
     status:boolean
+    box:1|2|3|4
     ask:string
     answer:string
 }

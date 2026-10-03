@@ -1,5 +1,5 @@
 import { ICardRepository } from "../../card/repository/ICardRepository";
-import { Review } from "../model/Review";
+import { Review } from "../../card/model/Review";
 import { ReviewList } from "../model/ReviewList";
 
 export class GetReviewListUseCase {

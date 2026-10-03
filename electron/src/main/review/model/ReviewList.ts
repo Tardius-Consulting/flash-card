@@ -1,11 +1,8 @@
 import { Card } from "../../card/model/Card";
-import { Review } from "./Review";
+import { Review } from "../../card/model/Review";
 
 export class ReviewList {
-    private _cards: Card[];
-    private constructor(cards: Card[]) {
-        this._cards = this.shuffleCards(cards);
-    }
+    private constructor(private _cards: Card[]) {}
 
     private shuffleCards(array: Card[]): Card[] {
         // Cria uma cópia para não modificar a lista original
@@ -29,9 +26,15 @@ export class ReviewList {
     }
 
     public get cards(): Review[] {
+        this._cards = this.shuffleCards(this._cards);
+        return this.toState;
+    }
+
+    public get toState(): Review[] {
         return this._cards.map((card) => ({
             id: card.id,
             status: null,
+            box:card.box,
             ask: card.ask,
             answer: card.answer
         }));
