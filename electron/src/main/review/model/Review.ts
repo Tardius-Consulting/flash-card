@@ -1,4 +1,4 @@
-import { boxType } from "../../card/model/Review";
+import { boxType } from "../../../types/card.dto";
 import { ISOString } from "../../shared/ISOString";
 
 export class Review{

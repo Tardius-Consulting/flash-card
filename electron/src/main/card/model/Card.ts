@@ -1,4 +1,4 @@
-import { boxType } from "./Review";
+import { boxType } from "../../../types/card.dto";
 
 export class Card{
     private constructor(

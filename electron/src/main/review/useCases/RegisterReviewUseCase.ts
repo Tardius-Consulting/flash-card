@@ -1,4 +1,4 @@
-import { ConcludeReviewDTO } from "../../../types/review.dto";
+import { ConcludeReviewDTO } from "../../../types/card.dto";
 import { ICardRepository } from "../../card/repository/ICardRepository";
 import { Review } from "../model/Review";
 

@@ -1,4 +1,4 @@
-import { ConcludeReviewDTO } from "../../../types/review.dto";
+import { ConcludeReviewDTO } from "../../../types/card.dto";
 import { ReviewState } from "./IReviewRepository";
 
 export class ElectronReviewGateway{

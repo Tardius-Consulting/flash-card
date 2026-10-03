@@ -1,5 +1,5 @@
+import { CardDTO } from "../../../types/card.dto";
 import { Card } from "../../card/model/Card";
-import { Review } from "../../card/model/Review";
 
 export class ReviewList {
     private constructor(private _cards: Card[]) {}
@@ -25,12 +25,12 @@ export class ReviewList {
         return new ReviewList(cards);
     }
 
-    public get cards(): Review[] {
+    public get cards(): CardDTO[] {
         this._cards = this.shuffleCards(this._cards);
         return this.toState;
     }
 
-    public get toState(): Review[] {
+    public get toState(): CardDTO[] {
         return this._cards.map((card) => ({
             id: card.id,
             status: null,
