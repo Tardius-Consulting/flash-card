@@ -1,5 +1,5 @@
 import { ConcludeReviewDTO } from "../../../types/card.dto";
-import { ICardRepository } from "../../card/repository/ICardRepository";
+import { ICardRepository } from "../repository/ICardRepository";
 import { Review } from "../model/Review";
 
 export class RegisterReviewUseCase {

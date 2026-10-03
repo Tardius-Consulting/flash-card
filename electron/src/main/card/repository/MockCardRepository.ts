@@ -1,6 +1,6 @@
 import { Card } from "../model/Card";
 import { ICardRepository } from "./ICardRepository";
-import { Review } from "../../review/model/Review";
+import { Review } from "../model/Review";
 const cards = [
             {
                 "userID": "teste_id",

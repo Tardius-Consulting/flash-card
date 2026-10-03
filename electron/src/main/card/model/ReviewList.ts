@@ -1,5 +1,5 @@
 import { CardDTO } from "../../../types/card.dto";
-import { Card } from "../../card/model/Card";
+import { Card } from "./Card";
 
 export class ReviewList {
     private constructor(private _cards: Card[]) {}

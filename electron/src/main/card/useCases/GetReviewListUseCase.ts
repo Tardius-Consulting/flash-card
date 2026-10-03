@@ -1,5 +1,5 @@
 import { CardDTO } from "../../../types/card.dto";
-import { ICardRepository } from "../../card/repository/ICardRepository";
+import { ICardRepository } from "../repository/ICardRepository";
 import { ReviewList } from "../model/ReviewList";
 
 export class GetReviewListUseCase {

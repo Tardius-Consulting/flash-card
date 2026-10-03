@@ -1,4 +1,4 @@
-import { Review } from "../../review/model/Review";
+import { Review } from "../model/Review";
 import { Card } from "../model/Card";
 
 export interface ICardRepository {
