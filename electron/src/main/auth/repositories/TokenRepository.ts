@@ -16,8 +16,7 @@ export class TokenRepository implements ITokenRepository{
         this.store.set("_Autorization_Code",{[code]:data});
     }
     async validateAutorizationCode(code:string):Promise<unknown>{
-        const key = CodeFactory.encryptCode(code)
-        return this.store.get("_Autorization_Code")?.[key];
+        return this.store.get("_Autorization_Code")?.[code];
     }
     async registerRefreshCode(code: string,data:unknown): Promise<void> {
         this.store.set("_Refresh_Code",{[code]:data});

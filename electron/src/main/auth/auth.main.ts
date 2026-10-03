@@ -32,7 +32,7 @@ const changePassword = new ChangePasswordUseCase(userRepository,tokenRepository,
 
 ipcMain.handle('auth:Login',async (event,data:{email:string,password:string})=>{
     const result = await handleLogin(data)
-    event.sender.send("render:authResult",result)
+    return result
 })
 
 ipcMain.handle('auth:register',async(event,data:{email:string,password:string,ask:string,answer:string})=>{
