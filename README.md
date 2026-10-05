@@ -56,3 +56,48 @@ Ao deletar um grupo é perguntado se o usuário deseja excluir os cartões assoc
 - Marcar revisão
 
 A revisão é uma funcionalidade que libera os cartões para teste de conhecimento em uma ordem aleatória dentre os cartões do grupo expecífico que está sendo estudado, ao fim da revisão, de acordo com as respostas certas e erradas o sitema marca os novos periodos de revisão.
+
+## Protótipo do projeto
+
+Abaixo demonstamos como ficará o projeto de forma estática, não representando a forma 100% finalizada
+
+
+- Tela de login do usuário
+<div align="center">
+  <img src="./documentation/prototype/Page-Login.png" alt="Page-Login" width="600">
+</div>
+
+- Tela da frente do cartão de perguntas
+<div align="center">
+  <img src="./documentation/prototype/Page - Card - Frente.png" alt="Page - Card - Verso" width="600">
+</div>
+
+- Tela do verso do cartão de perguntas
+<div align="center">
+  <img src="./documentation/prototype/Page - Card - Verso.png" alt="Page - Card - Verso" width="600">
+</div>
+
+- Tela dos cartões dentro de um grupo
+<div align="center">
+  <img src="./documentation/prototype/Page - Cards.png" alt="Page - Cards" width="600">
+</div>
+
+- Tela de criação de cartões
+<div align="center">
+  <img src="./documentation/prototype/Page - Create Card.png" alt="Page - Create Card" width="600">
+</div>
+
+- Tela de criação de grupos
+<div align="center">
+  <img src="./documentation/prototype/Page - Edit Group.png" alt="Page - Edit Group" width="600">
+</div>
+
+- Tela dos grupos do usuário
+<div align="center">
+  <img src="./documentation/prototype/Page - Groups List.png" alt="Page - Group List" width="600">
+</div>
+
+- Tela de resultados de uma revisão
+<div align="center">
+  <img src="./documentation/prototype/Page - Result.png" alt="Page - result" width="600">
+</div>
