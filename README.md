@@ -1,20 +1,37 @@
-# flash-card
-Esse é um aplicativo de flash card, tendo isso em consideração o aplicativo se volta para os seguintes usos:
-- Revisão de matérias não manuais
-- Acompanhamento de matérias
-- Planejamento de estudos
+# ChameleCards
 
-Além disso o aplicativo não se propõe a:
-- Ser fonte de conteudo
-- Proporcionar aprendizado inicial
-- Proporcionar cursos completos
-- Ser ferramenta de avaliação acadêmica
+## Descrição do projeto
+### Contexto
+O **ChameleCards** é uma aplicação voltada para a revisão e acompanhamento de matérias através do método de cartões de memória (flashcards) e repetição espaçada. A plataforma atua como uma ferramenta centralizadora de estudos, auxiliando na organização do planeamento individual.
 
-## Resumo
-O presente aplicativo foca em revisão de conteudo, com público focado em alunos de 15 anos ou mais, o principal problema que o aplicativo foca em resolver é permitir ao estudante uma melhor visibilidade dos estudos, perdendo o pânico de ter muita matéria para revisar e não saber por onde começar.
+O aplicativo **não** se propõe a ser fonte primária de conteúdo, proporcionar aprendizado inicial, oferecer cursos completos ou servir como ferramenta de avaliação académica.
 
-O produto visa de diferênciar, além da experiência mais fluida por ter poucos anuncios, permitir ao usuário centralizar o planejamento e estudo em um único aplicativo fazendo ele passar mais tempo na plataforma.
-## Plano de implementação
+### O Problema
+Muitos estudantes enfrentam dificuldades na retenção de conteúdos e na organização da sua rotina de estudos. A acumulação de matérias gera incerteza sobre por onde começar as revisões, resultando em sobrecarga e perda de eficiência no processo de aprendizagem.
+
+### Justificativa
+A criação do **ChameleCards** justifica-se pela necessidade de proporcionar ao estudante uma experiência fluida e centralizada de planeamento e estudo. Ao oferecer uma plataforma com baixa interrupção por anúncios e com foco na visualização clara do progresso, permite-se que o utilizador mantenha a consistência nos estudos sem precisar de alternar entre múltiplas ferramentas.
+
+## Objetivos do Projeto
+
+### Objetivo Geral
+Desenvolver um sistema desktop de flashcards focado na revisão contínua de conteúdos, permitindo a organização intuitiva de matérias e a otimização do tempo de estudo do utilizador.
+
+### Objetivos Específicos
+- Permitir a gestão completa (criação, edição, visualização e remoção) de cartões de perguntas e grupos temáticos.
+- Implementar um sistema de revisão com ordenação aleatória e agendamento de novos períodos de estudo com base no desempenho do utilizador.
+- Proporcionar um sistema de autenticação para suporte a múltiplos perfis de utilizadores num mesmo dispositivo.
+- Exibir relatórios e resultados ao final de cada sessão de revisão.
+
+## Público-Alvo
+
+O sistema é direcionado para estudantes a partir dos 15 anos de idade, englobando:
+- Alunos do Ensino Secundário/Médio.
+- Estudantes Universitários de diversas áreas (Engenharia, Direito, Programação, Medicina, etc.).
+- Candidatos a exames, concursos ou estudantes de idiomas.
+- Pessoas que necessitem de organizar e rever conteúdos não manuais de forma autónoma.
+
+## Principais Funcionalidades
 O sitema possui, até o momento, as seguintes funcionalidades a serem implementadas.
 ### Autenticação
 - Login 
@@ -56,6 +73,12 @@ Ao deletar um grupo é perguntado se o usuário deseja excluir os cartões assoc
 - Marcar revisão
 
 A revisão é uma funcionalidade que libera os cartões para teste de conhecimento em uma ordem aleatória dentre os cartões do grupo expecífico que está sendo estudado, ao fim da revisão, de acordo com as respostas certas e erradas o sitema marca os novos periodos de revisão.
+
+## Tecnologias previstas
+São previstas a utilização das seguintes tecnologias para a entrega do projeto:
+- Linguagem: Typescript
+- frameworks: Electron, React
+- Banco de dados: SQLite, Electron-Store
 
 ## Protótipo do projeto
 
