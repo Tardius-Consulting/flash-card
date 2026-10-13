@@ -7,6 +7,33 @@
   </head>
   <body class="conteiner">
     <div id="root"></div>
+    <!-- think a way to organize the groups and cards lists 
+    side by side or in the order they get rendered -->
+      <div class="list-content">
+        <h4>Groups</h4>
+        <div>
+          <button onclick="mostrarDiv()" class="button" id="myButton">Group name 1</button>  
+          <button onclick="mostrarDiv()" class="button" id="myButton">Group name 2</button>
+          <button onclick="mostrarDiv()" class="button" id="myButton">Group name 3</button>
+        </div>
+        <div id="cards-list" class="cardlist-content"> <!-- should keep buttons to get user to cards -->
+          <div>
+            <h4>Cards</h4>
+          </div>
+          <div class="button">
+            <button id="myButton">Card name 1</button>
+          </div>
+          <div class="button">
+            <button id="myButton">Card name 2</button>
+          </div>
+          <div class="button">
+            <button id="myButton">Card name 3</button>
+          </div>
+
+        </div>  
+      </div>
+    
     <script type="module" src="./src/renderer.tsx"></script>
+    <script src="functions.js"></script>
   </body>
 </html>
