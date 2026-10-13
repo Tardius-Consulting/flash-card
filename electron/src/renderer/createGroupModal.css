@@ -1,0 +1,71 @@
+.container{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-content: center;
+    width: 95vw;
+    margin: auto;
+    padding: 10px 25px 15px 25px;
+    border: 2px solid var(--field-border-color);
+    border-radius: 15px;
+    background-color: var(--group-background-color);
+}
+
+label{
+    display: block;
+    padding: 8px 0px;
+    font-weight: 700;
+    font-size: var(--field-title-font-size);
+    color: var(--filed-title-color);
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23333' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+#GroupName, #GroupColor{
+    width: 100%;
+    padding: 10px 10px;
+    border: 3px solid var(--field-border-color);
+    border-radius: 15px; 
+    font-size: var(--field-font-size);
+    background-color: white;
+    color: var(--field-placeholder-color);
+}
+
+.Buttons{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.Button{
+    flex: 1 1 200px;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: var(--button-font-size);
+    font-weight: 600;
+    border: 3px solid var(--field-border-color);
+    border-radius: 20px;
+    background-color: var(--button-background-color);
+    color: white;
+}
+
+.Button:hover{
+    cursor: pointer;
+}
+
+#Goback{
+    
+}
+
+#Creategroup{
+    background-color: var(--button-confirmation-color);
+    border-color: var(--button-confirmation-border-color);
+}
