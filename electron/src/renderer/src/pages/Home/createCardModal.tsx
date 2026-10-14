@@ -1,16 +1,19 @@
-import React, { Modal } from "react"
-export default function Index(){
-    return<Modal>
-        <div class="group">
+import React from "react"
+import Modal from "./Shared/Modal"
+import { ActionButton, FallBackButton } from "./Shared/Button"
+
+export default function Index() {
+    return<Modal onExit={() => console.log("teste1")}>
+        <div className="group">
             <h2>Python</h2>
         </div>
-        <div class="subgroup">
+        <div className="subgroup">
             <h3>Seus cards</h3>
-            <button type="submit" id="Study" class="Button">Estudar</button>
+            <button type="submit" id="Study" className="Button">Estudar</button>
         </div>
-        <div class="Buttons">
-            <button type="submit" id="Goback" class="Button">Voltar</button>
-            <button type="submit" id="Creategroup" class="Button">Criar card</button>
+        <div className="Buttons">
+            <button type="submit" id="Goback" className="Button">Voltar</button>
+            <button type="submit" id="Creategroup" className="Button">Criar card</button>
         </div>
     </Modal>
 }
