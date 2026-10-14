@@ -1,10 +1,12 @@
-import { GroupData } from "./GroupData";
-import { Group } from "./Groups";
+import { Group } from "./Group";
+
 
 export interface GroupRepository{
-    createGroup(userid:string, group:Group): Group;
+    create(userid:string, group:Group): Promise<Group>;
 
-    editGroup(userid:string, groupid:string, group:GroupData): Group | null;
+    edit(userid:string, group:Group): Promise<Group | null>;
 
-    deleteGroup(userid:string, groupid:string): boolean;
+    delete(userid:string, groupid:string): Promise<void>;
+
+    getByID(userid:string, groupid:string): Promise<Group | null>;
 }
