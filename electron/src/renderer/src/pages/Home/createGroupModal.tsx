@@ -1,7 +1,10 @@
 import React from "react"
 import Modal from "./Shared/Modal"
+import { ActionButton, FallBackButton } from "./Shared/Button"
+import { useNavigate } from "react-router"
 
 export default function Index(){
+    const navigate = useNavigate()
     return<Modal onExit={() => console.log("teste2")}>
         <div className="container">
                 <form>
@@ -19,8 +22,8 @@ export default function Index(){
                         </select>
                     </div>
                     <div className="Buttons">
-                        <button type="submit" id="Goback" className="Button">Voltar</button>
-                        <button type="submit" id="Creategroup" className="Button">Criar grupo</button>
+                        <FallBackButton text="Voltar" onClick={() => navigate('/GroupModal')}/>
+                        <ActionButton text="Criar grupo" onClick={() => navigate('/GroupModal')}/>
                     </div>
                 </form>
         </div>
