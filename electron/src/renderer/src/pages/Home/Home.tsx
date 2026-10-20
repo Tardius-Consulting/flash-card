@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { useNavigate } from "react-router"
 import { IReviewRepository } from "../../Infrastructure/IReviewRepository"
+import { ActionButton } from "./Shared/Button"
 
 export default function HomeScreem({reviewRepository}:{reviewRepository:IReviewRepository}){
     const [pendingReview,setPendingReview] = React.useState(false)
@@ -16,6 +17,6 @@ export default function HomeScreem({reviewRepository}:{reviewRepository:IReviewR
     {pendingReview &&
         <button onClick={()=>navigate('/Review/')}>Continuar revisão</button>
     }
-    <button onClick={()=>navigate('/Review/teste_id')}>testar revisão</button>
+    <ActionButton onClick={()=>navigate('/Review/teste_id')} text="testar revisão"/>
     </>
 }

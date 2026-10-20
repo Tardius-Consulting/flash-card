@@ -1,5 +1,6 @@
 import React from "react"
 import { ChangeEvent, useState } from "react"
+import { ActionButton } from "../Home/Shared/Button"
 
 export function RecoverPassword({submitChange}:{submitChange:(password:string)=>void}){
     const [password, setPassword] = useState('')
@@ -15,13 +16,12 @@ export function RecoverPassword({submitChange}:{submitChange:(password:string)=>
         setPassword2(value)
     }
 
-    const onSubmit=(e: React.SubmitEvent)=>{
-        e.preventDefault();
+    const onSubmit=()=>{
         if(password!='' && password==password2)
             submitChange(password)
     }
 
-    return<form onSubmit={onSubmit} style={{
+    return<form style={{
             display:"flex",
             flexDirection:"column",
             width:"300px"
@@ -41,8 +41,6 @@ export function RecoverPassword({submitChange}:{submitChange:(password:string)=>
                 value={password2}
                 onChange={onChangePassword2}
             />
-            <button type="submit" id="Confirmation" className="action button">
-                Entrar
-            </button>
+            <ActionButton text="Entrar" onClick={onSubmit}/>
         </form>
 }

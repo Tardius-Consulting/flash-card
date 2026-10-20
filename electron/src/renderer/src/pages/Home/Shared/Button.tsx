@@ -2,11 +2,12 @@ import React from "react"
 
 const defaultStyle = {
   minWidth:"100px",
-  height:"50px",
+  height:"30px",
   borderRadius:10,
-  border:"1px solid"
+  border:"1px solid",
+  marginTop:"20px"
 }
-
+ 
 const colo1 = "#FFF"
 const colo2 = "#000"
 
