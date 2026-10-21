@@ -1,8 +1,9 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Boa prática para incluir padding/borders no tamanho total */
+  box-sizing: border-box;
 }
+
 body {
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
@@ -16,18 +17,6 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-
-.button{
-  border-radius: 5px;
-  height: 30px;
-  margin: 20px 0;
-  cursor: pointer;
-}
-
-.action{
-  border: 1px solid black;
-  border-radius: 5px;
 }
 
 input{

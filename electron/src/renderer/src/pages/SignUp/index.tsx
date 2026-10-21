@@ -3,6 +3,7 @@ import { IAuthGateway } from "../../Infrastructure/IAuthGateway"
 import { useNavigate } from "react-router"
 import InitiRegister from "./SignUp"
 import AskRegister from "./AskRegister"
+import { FallBackButton } from "../Home/Shared/Button"
 
 export default function SignUp({gateway}:{gateway:IAuthGateway}){
     const [data, setData] = useState({
@@ -45,8 +46,6 @@ export default function SignUp({gateway}:{gateway:IAuthGateway}){
             :
             <AskRegister continueRegister={onSubmit} returnForm={()=>setFirst(true)}/>
         }
-        <a onClick={onClick} className="button">
-            Já tenho um perfil
-        </a>
+        <FallBackButton text="Tenho um perfil" onClick={onClick}/>
     </div>
 }

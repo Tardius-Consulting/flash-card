@@ -15,6 +15,7 @@ export default function Index({children, onExit}:{children:React.ReactNode,onExi
     onClick={onExit}
   >
     <div style={{
+      display:"flex",
       width:"70%", 
       height:"70%",
       backgroundColor:"#FFF",

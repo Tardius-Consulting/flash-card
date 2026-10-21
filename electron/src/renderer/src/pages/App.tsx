@@ -9,7 +9,7 @@ import CardScreem from './Home/Group/Card';
 import GroupConteiner from './Home/Group';
 import HomeConteiner from './Home';
 import { AppProvider } from '../context/app.context';
-import { ReviewScreem } from './Home/Review';
+import { ReviewScreem } from './Home/Group/Review';
 import { ReviewProvider } from '../context/Review.context';
 import { WebReviewRepository } from '../Infrastructure/WebReviewRepository';
 
@@ -20,14 +20,6 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path='/Review/:groupID' element={<ReviewProvider repository={repository}>
-          <ReviewScreem/>
-        </ReviewProvider>
-      }/>
-      <Route path='/Review' element={<ReviewProvider repository={repository}>
-          <ReviewScreem/>
-        </ReviewProvider>
-      }/>
       <Route path='/Login' element={<Login gateway={authGateway}/>}/>
       <Route path='/' element={<AppProvider gateway={authGateway}>
           <HomeConteiner/>
