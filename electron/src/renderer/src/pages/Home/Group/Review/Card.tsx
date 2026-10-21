@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { ReviewState } from "../../../Infrastructure/IReviewRepository"
+import { ReviewState } from "../../../../Infrastructure/IReviewRepository"
 
 export function Card({index,handleNext,card}:{index:number,handleNext:(index:number,status:boolean)=>void,card:ReviewState}){
     const [showQuestion,setShowQuestion] = useState(true)

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react"
-import { useReviewContext } from "../../../context/Review.context"
+import { ReviewProvider, useReviewContext } from "../../../../context/Review.context"
 import { FinishScreen } from "./FinishScreen"
 import { Card } from "./Card"
+import { IReviewRepository } from "../../../../Infrastructure/IReviewRepository"
 
-export function ReviewScreem(){
+export function ReviewScreem({reviewRepository}:{reviewRepository:IReviewRepository}){
+  return <ReviewProvider repository={reviewRepository}>
+    <Index/>
+  </ReviewProvider>
+}
+function Index(){
     const { saveProcess, list, definedList } = useReviewContext()
     const [card,setCard] = useState(<></>)
     const handleNext = async(index:number,status:boolean)=>{
@@ -29,5 +35,5 @@ export function ReviewScreem(){
         }
         setCard(<Card index={index} handleNext={handleNext} card={list[index]}/>)
     },[definedList])
-    return card
+    return  card
 }
