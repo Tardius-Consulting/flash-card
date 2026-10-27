@@ -1,4 +1,6 @@
+import AskRegister from "../../../renderer/src/pages/SignUp/AskRegister";
 import { boxType } from "../../../types/card.dto";
+import { CardInfo } from "./CardInfo";
 
 export class Card{
     private constructor(
@@ -22,5 +24,9 @@ export class Card{
     }
     public static hydrate(id: string, ask: string, answer: string, groupID: string, box: boxType): Card{
         return new Card(id, ask, answer, groupID, box);
+    }
+    public static create(data: CardInfo){
+        const id = new Date().getTime().toString()
+        return new Card (id,data.pergunta, data.resposta, data.groupId, 1) 
     }
 }
