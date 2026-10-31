@@ -22,7 +22,7 @@ export default function Index({onCancel}:{onCancel:()=>void}){
                 <form>
                     <div className="Field">
                         <label style={{display: "block", padding: "10px 0px", fontWeight: "700", fontSize: "20px", color: "#444444"}} htmlFor="GroupName">Nome do grupo:</label>
-                        <input type="text" name="groupname" id="GroupName" value={nomeGrupo} onChange={handleNomeGrupoChange} minLength={1} placeholder="Nome do grupo.." required style={{width: "100%", padding: "10px 10px", border: "3px solid #8b8b8b",borderRadius: "15px", fontSize: "22px", backgroundColor: "white", color: "#767676"}}/>
+                        <input type="text" name="groupname" id="GroupName" value={nomeGrupo} onChange={handleNomeGrupoChange} minLength={1} placeholder="Nome do grupo.." required style={{width: "100%", padding: "23px 10px", border: "3px solid #8b8b8b",borderRadius: "15px", fontSize: "22px", backgroundColor: "white", color: "#767676"}}/>
                     </div>
                     <div className="Field">
                         <label style={{display: "block", padding: "10px 0px", fontWeight: "700", fontSize: "20px", color: "#444444"}} htmlFor="GroupColor">Cor do grupo:</label>
@@ -32,7 +32,7 @@ export default function Index({onCancel}:{onCancel:()=>void}){
                             <option value="roxo">Roxo</option>
                         </select>
                     </div>
-                    <div>
+                    <div style={{display: "flex", flexFlow: "row nowrap", justifyContent: "flex-end" , gap: "5px"}}>
                         <FallBackButton text="Voltar" onClick={onCancel}/>
                         <ActionButton text="Criar grupo" onClick={onAction}/>
                     </div>
