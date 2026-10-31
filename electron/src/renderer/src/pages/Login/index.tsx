@@ -2,6 +2,7 @@ import { type ChangeEvent, useState } from "react"
 import React from "react"
 import type{ IAuthGateway } from "../../Infrastructure/IAuthGateway.js"
 import { useNavigate } from "react-router"
+import { ActionButton, FallBackButton } from "../Home/Shared/Button.js"
 
 export default function Login({gateway}:{gateway:IAuthGateway}){
     const [email, setEmail] = useState('')
@@ -16,8 +17,7 @@ export default function Login({gateway}:{gateway:IAuthGateway}){
         setPassword(value)
     }
 
-    const onSubmit=async(e:React.SubmitEvent)=>{
-        e.preventDefault()
+    const onSubmit=async()=>{
         try{
             const result = await gateway.login(email,password)
             if(!result.ok)throw new Error(result.message)
@@ -32,7 +32,7 @@ export default function Login({gateway}:{gateway:IAuthGateway}){
         navigate("/SignUp")
     }
     return <div className="">
-        <form onSubmit={onSubmit} style={{
+        <form style={{
             display:"flex",
             flexDirection:"column",
             width:"300px"
@@ -51,12 +51,8 @@ export default function Login({gateway}:{gateway:IAuthGateway}){
                 id="PasswordField"
                 onChange={onChangePassword}
             />
-            <button type="submit" id="Confirmation" className="action button">
-                Entrar
-            </button>
+            <ActionButton text="Entrar" onClick={onSubmit}/>
         </form>
-        <a onClick={onClick} className="button">
-            Criar perfil
-        </a>
+        <FallBackButton text="Criar perfil" onClick={onClick}/>
     </div>
 }

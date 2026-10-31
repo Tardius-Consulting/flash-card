@@ -1,5 +1,6 @@
 import React from "react"
 import { ChangeEvent, useState } from "react"
+import { ActionButton } from "../../Home/Shared/Button"
 
 export function GetAsk({getAsk}:{getAsk:(email:string)=>Promise<void>}){
 
@@ -9,7 +10,9 @@ export function GetAsk({getAsk}:{getAsk:(email:string)=>Promise<void>}){
         setEmail(value)
     }
 
-    return <form onSubmit={()=>getAsk(email)} style={{
+    const onSubmit = ()=>getAsk(email)
+
+    return <form style={{
         display:"flex",
         flexDirection:"column",
         width:"300px"
@@ -22,8 +25,6 @@ export function GetAsk({getAsk}:{getAsk:(email:string)=>Promise<void>}){
             value={email}
             onChange={onChangeEmail}
         />
-        <button type="submit" id="Confirmation" className="action button">
-            Entrar
-        </button>
+        <ActionButton text="Entrar" onClick={onSubmit}/>
     </form>
 }

@@ -56,4 +56,8 @@ export class MockCardRepository implements ICardRepository{
     public async registerReview(userID: string, cards: Review[]): Promise<void> {
         console.log(`Registrando revisão para o usuário ${userID}:`, cards);
     }
+
+    public async registerCard(userid: string, card: Card): Promise<void> {
+        console.log("Chamou register Card com userid ",userid," e card ",card)
+    }
 }

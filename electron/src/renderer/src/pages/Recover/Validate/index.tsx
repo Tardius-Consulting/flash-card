@@ -21,5 +21,5 @@ export function ValidateConteiner({gateway,setValidated}:{
     }
     if(!showAsk)
     return <GetAsk getAsk={getAsk}/>
-    return <SubmitAnswer ask={ask} submitAsk={submitAnswer}/>
+    return <SubmitAnswer ask={ask} submitAnswer={submitAnswer}/>
 }

@@ -1,7 +1,8 @@
 import React from "react"
 import { ChangeEvent, useState } from "react"
+import { ActionButton } from "../../Home/Shared/Button"
 
-export function SubmitAnswer({submitAsk,ask}:{ask:string,submitAsk:(answer:string)=>Promise<void>}){
+export function SubmitAnswer({submitAnswer,ask}:{ask:string,submitAnswer:(answer:string)=>Promise<void>}){
 
     const [answer,setAnswer] = useState('')
     const onChangeAnswer=(e:ChangeEvent<HTMLInputElement>)=>{
@@ -9,7 +10,9 @@ export function SubmitAnswer({submitAsk,ask}:{ask:string,submitAsk:(answer:strin
         setAnswer(value)
     }
 
-    return <form onSubmit={()=>submitAsk(answer)} style={{
+    const onSubmit = ()=>submitAnswer(answer)
+
+    return <form style={{
         display:"flex",
         flexDirection:"column",
         width:"300px"
@@ -23,8 +26,6 @@ export function SubmitAnswer({submitAsk,ask}:{ask:string,submitAsk:(answer:strin
             value={answer}
             onChange={onChangeAnswer}
         />
-        <button type="submit" id="Confirmation" className="action button">
-            Entrar
-        </button>
+        <ActionButton text="Entrar" onClick={onSubmit}/>
     </form>
 }

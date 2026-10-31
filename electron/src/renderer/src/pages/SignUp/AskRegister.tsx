@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from "react"
+import { ActionButton } from "../Home/Shared/Button"
 
 export default function AskRegister({continueRegister,returnForm}:{continueRegister:(data:{ask:string,answer:string})=>void,returnForm:()=>void}){
     const [ask, setAsk] = useState('')
@@ -14,13 +15,12 @@ export default function AskRegister({continueRegister,returnForm}:{continueRegis
         setAnswer(value)
     }
 
-    const onSubmit=(e: React.SubmitEvent)=>{
-        e.preventDefault();
-        if(ask!='' && answer!='')
-            continueRegister({ask,answer})
+    const onSubmit=()=>{
+      if(ask!='' && answer!='')
+        continueRegister({ask,answer})
     }
 
-    return<form onSubmit={onSubmit} style={{
+    return<form style={{
             display:"flex",
             flexDirection:"column",
             width:"300px"
@@ -45,8 +45,6 @@ export default function AskRegister({continueRegister,returnForm}:{continueRegis
                 id="AnswerField"
                 onChange={onChangeAnswer}
             />
-            <button type="submit" id="Confirmation" className="action button">
-                Entrar
-            </button>
+            <ActionButton text="Entrar" onClick={onSubmit}/>
         </form>
 }

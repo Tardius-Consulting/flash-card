@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from "react"
+import { ActionButton } from "../Home/Shared/Button"
 
 export default function InitiRegister({continueRegister}:{continueRegister:(data:{email:string,password:string})=>void}){
     const [email, setEmail] = useState('')
@@ -20,13 +21,12 @@ export default function InitiRegister({continueRegister}:{continueRegister:(data
         setPassword2(value)
     }
 
-    const onSubmit=(e: React.SubmitEvent)=>{
-        e.preventDefault();
+    const onSubmit=()=>{
         if(email!='' && password!='' && password==password2)
             continueRegister({email,password})
     }
 
-    return<form onSubmit={onSubmit} style={{
+    return<form style={{
             display:"flex",
             flexDirection:"column",
             width:"300px"
@@ -54,8 +54,6 @@ export default function InitiRegister({continueRegister}:{continueRegister:(data
                 value={password2}
                 onChange={onChangePassword2}
             />
-            <button type="submit" id="Confirmation" className="action button">
-                Entrar
-            </button>
+            <ActionButton text="Entrar" onClick={onSubmit}/>
         </form>
 }
