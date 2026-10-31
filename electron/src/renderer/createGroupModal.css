@@ -3,7 +3,7 @@
     flex-flow: column nowrap;
     justify-content: center;
     align-content: center;
-    width: 95vw;
+    width: 95%;
     margin: auto;
     padding: 10px 25px 15px 25px;
     border: 2px solid var(--field-border-color);
@@ -13,7 +13,7 @@
 
 label{
     display: block;
-    padding: 8px 0px;
+    padding: 10px 0px;
     font-weight: 700;
     font-size: var(--field-title-font-size);
     color: var(--filed-title-color);
@@ -47,7 +47,6 @@ select {
 
 .Button{
     flex: 1 1 200px;
-    margin-top: 20px;
     padding: 10px;
     font-size: var(--button-font-size);
     font-weight: 600;
