@@ -1,4 +1,4 @@
-import { ISOString } from "../../../../main/shared/ISOString"
+import { ISOString } from "../../shared/ISOString"
 
 export class Group{
     private constructor(
@@ -6,7 +6,8 @@ export class Group{
         private color:string,
         private name:string,
         private lastReviewed:ISOString, 
-        private nextReview:ISOString){}
+        private nextReview:ISOString
+    ){}
     public static create(color:string, name:string):Group{
         const id = Math.random().toString(36);
         const lastReviewed = new ISOString(new Date());

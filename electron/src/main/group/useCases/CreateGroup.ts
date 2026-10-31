@@ -1,10 +1,11 @@
-import { ISOString } from "../../../../main/shared/ISOString";
-import { CreateGroupDTO, EditGroupDTO } from "./GroupData";
-import { GroupRepository } from "./GroupRepository";
-import { Group } from "./Group";
+import { ISOString } from "../../shared/ISOString";
+import { CreateGroupDTO, EditGroupDTO } from "../repository/GroupData";
+import { IGroupRepository } from "../repository/IGroupRepository";
+import { Group } from "../model/Group";
 
-export class CreateGroupUseCases{
-    constructor(private repository:GroupRepository){}
+
+export class CreateGroup{
+    constructor(private repository:IGroupRepository){}
 
     public async createGroup(userid:string, data:CreateGroupDTO): Promise<Group>{ 
         const group = Group.create(
