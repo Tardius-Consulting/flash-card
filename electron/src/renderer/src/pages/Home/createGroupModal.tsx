@@ -1,12 +1,23 @@
 import React from "react"
 import Modal from "./Shared/Modal"
 import { ActionButton, FallBackButton } from "./Shared/Button"
-import { useNavigate } from "react-router"
 
-export default function Index(){
-    const navigate = useNavigate()
-    return<Modal onExit={() => console.log("teste2")}>
-        <div className="container">
+export default function Index({onCancel}:{onCancel:()=>void}){
+    const [nomeGrupo, setNomeGrupo] = React.useState<string>("")
+    const [color, setColor] = React.useState<string>("")
+
+    const handleNomeGrupoChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        setNomeGrupo(e.target.value);
+    }
+
+    const handleColorChange = (e: React.ChangeEvent<HTMLSelectElement>)=>{
+        setColor(e.target.value);
+    }
+
+    const onAction = ()=>{}
+
+    return(
+        <Modal onExit={onCancel}>
             <div style={{display: "flex", flexFlow: "column nowrap", justifyContent: "center", alignContent: "center", width: "95%", margin: "auto", padding: "10px 25px 15px 25px", border: "2px solid #8b8b8b", borderRadius: "15px", backgroundColor: "#d7d7d7"}}>
                 <form>
                     <div className="Field">
@@ -21,8 +32,9 @@ export default function Index(){
                             <option value="roxo">Roxo</option>
                         </select>
                     </div>
-                        <FallBackButton text="Voltar" onClick={() => navigate('/GroupModal')}/>
-                        <ActionButton text="Criar grupo" onClick={() => navigate('/GroupModal')}/>
+                    <div>
+                        <FallBackButton text="Voltar" onClick={onCancel}/>
+                        <ActionButton text="Criar grupo" onClick={onAction}/>
                     </div>
                 </form>
             </div>
