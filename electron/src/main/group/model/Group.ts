@@ -18,6 +18,10 @@ export class Group{
     public static hidrate(id:string, color:string, name:string, lastReviewed:ISOString, nextReview:ISOString):Group{
         return new Group(id, color, name,lastReviewed,nextReview);
     }
+    public update(color:string, name:string):void{
+        this.color = color;
+        this.name = name
+    }
     public toState(): GroupDB{
         return {
             id:this.id,
