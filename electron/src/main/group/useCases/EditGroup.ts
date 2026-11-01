@@ -9,8 +9,9 @@ export class EditGroup{
     public async editGroup(userid:string, group:EditGroupDTO): Promise<Group | null>{
 
         const retrievedGroup = await this.repository.getByID(userid, group.id);
+
         if(!retrievedGroup){
-            return null;
+            throw new Error(`Grupo com ID ${group.id} não encontrado.`);
         }
 
         const groupData = retrievedGroup.toState();
