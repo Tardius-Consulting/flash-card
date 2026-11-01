@@ -1,7 +1,5 @@
-import { ISOString } from "../../shared/ISOString";
 import { EditGroupDTO } from "../repository/GroupData";
 import { IGroupRepository } from "../repository/IGroupRepository";
-import { Group } from "../model/Group";
 
 export class EditGroup{
     constructor(private repository:IGroupRepository){}
@@ -14,16 +12,8 @@ export class EditGroup{
             throw new Error(`Grupo com ID ${group.id} não encontrado.`);
         }
 
-        const groupData = retrievedGroup.toState();
+        retrievedGroup.update(group.color, group.name);
 
-        const editedGroup = Group.hidrate(
-            group.id,
-            group.color,
-            group.name,
-            new ISOString(new Date(groupData.lastReviewed)),
-            new ISOString(new Date(groupData.nextReview))
-        );
-
-        await this.repository.edit(userid, editedGroup);
+        await this.repository.edit(userid, retrievedGroup);
     }
 } 
