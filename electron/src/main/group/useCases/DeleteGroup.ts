@@ -4,6 +4,6 @@ export class DeleteGroup{
     constructor(private repository:IGroupRepository){}
 
     public async deleteGroup(userid:string, groupid:string): Promise<void>{
-        return this.repository.delete(userid, groupid);
+        await this.repository.delete(userid, groupid);
     }
 } 

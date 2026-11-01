@@ -6,7 +6,7 @@ import { Group } from "../model/Group";
 export class EditGroup{
     constructor(private repository:IGroupRepository){}
 
-    public async editGroup(userid:string, group:EditGroupDTO): Promise<Group | null>{
+    public async editGroup(userid:string, group:EditGroupDTO): Promise<void>{
 
         const retrievedGroup = await this.repository.getByID(userid, group.id);
 
@@ -24,6 +24,6 @@ export class EditGroup{
             new ISOString(new Date(groupData.nextReview))
         );
 
-        return this.repository.edit(userid, editedGroup);
+        await this.repository.edit(userid, editedGroup);
     }
 } 
