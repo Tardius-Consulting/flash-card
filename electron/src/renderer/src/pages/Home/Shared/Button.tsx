@@ -10,10 +10,13 @@ const defaultStyle = {
  
 const colo1 = "#FFF"
 const colo2 = "#000"
-
+const runAction = (e: React.MouseEvent<HTMLButtonElement>, f:()=>void)=>{
+  e.stopPropagation()
+  f()
+}
 export function ActionButton({onClick,text,style}:{onClick:()=>void,text:string,style?:React.CSSProperties}){
   return(<button 
-    onClick={onClick}
+    onClick={(e) => runAction(e, onClick)}
     style={
       {
         ...defaultStyle,
@@ -29,7 +32,7 @@ export function ActionButton({onClick,text,style}:{onClick:()=>void,text:string,
 
 export function FallBackButton({onClick,text,style}:{onClick:()=>void,text:string,style?:React.CSSProperties}){
   return(<button 
-    onClick={onClick}
+    onClick={(e) => runAction(e, onClick)}
     style={
       {
         ...defaultStyle,

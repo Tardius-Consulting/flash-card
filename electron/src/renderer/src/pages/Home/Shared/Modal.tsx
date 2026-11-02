@@ -9,9 +9,12 @@ export default function Index({children, onExit}:{children:React.ReactNode,onExi
       top:0,
       left:0
     }}
-    onClick={onExit}
+    onClick={(e) => {
+      if(e.target !== e.currentTarget) return
+      onExit()
+    }}
   >
-    <div className="conteiner" style={{
+    <div className="conteiner" onClick={(e) => e.stopPropagation()} style={{
       width:"70%", 
       height:"70%",
       backgroundColor:"#FFF",
