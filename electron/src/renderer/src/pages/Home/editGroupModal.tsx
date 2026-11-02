@@ -1,6 +1,8 @@
 import React from "react"
 import Modal from "./Shared/Modal"
 import { ActionButton, FallBackButton } from "./Shared/Button"
+import { Select } from "./Shared/Select"
+import { Input } from "./Shared/Input"
 
 export default function Index({onCancel}:{onCancel:()=>void}){
     const [editNomeGrupo, setEditNomeGrupo] = React.useState<string>("")
@@ -18,21 +20,21 @@ export default function Index({onCancel}:{onCancel:()=>void}){
 
     return(
         <Modal onExit={onCancel}>
-            <div style={{display: "flex", flexFlow: "column nowrap", justifyContent: "center", alignContent: "center", width: "95%", margin: "auto", padding: "10px 25px 15px 25px", border: "2px solid #8b8b8b", borderRadius: "15px", backgroundColor: "#d7d7d7"}}>
+            <div style={{display: "flex", flexFlow: "column nowrap", justifyContent: "center", width: "100%", height: "100%", padding: "0px 20px"}}>
                 <form>
                     <div className="Field">
-                        <label style={{display: "block", padding: "10px 0px", fontWeight: "700", fontSize: "20px", color: "#444444"}} htmlFor="GroupName">Nome do grupo:</label>
-                        <input type="text" name="groupname" id="GroupName" value={editNomeGrupo} onChange={handleNomeGrupoChange} minLength={1} placeholder="Nome do grupo.." required style={{width: "100%", padding: "23px 10px", border: "3px solid #8b8b8b",borderRadius: "15px", fontSize: "22px", backgroundColor: "white", color: "#767676"}}/>
+                        <label style={{display: "block", padding: "5px 0px"}} htmlFor="GroupName">Nome do grupo:</label>
+                        <Input type="text" name="groupname" value={editNomeGrupo} onChange={handleNomeGrupoChange} minLength={1} placeholder="Nome do grupo.." required/>
                     </div>
                     <div className="Field">
-                        <label style={{display: "block", padding: "10px 0px", fontWeight: "700", fontSize: "20px", color: "#444444"}} htmlFor="GroupColor">Cor do grupo:</label>
-                        <select name="groupcolor" id="GroupColor" value={editColor} onChange={handleColorChange} required style={{appearance: "none", WebkitAppearance: "none", MozAppearance: "none", backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23333' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 10px center", width: "100%", padding: "10px 10px", border: "3px solid #8b8b8b",borderRadius: "15px", fontSize: "22px", backgroundColor: "white", color: "#767676"}}>
-                            <option value="laranja">Laranja</option>
-                            <option value="azul">Azul</option>
-                            <option value="roxo">Roxo</option>
-                        </select>
+                        <label style={{display: "block", padding: "10px 0px"}} htmlFor="GroupColor">Cor do grupo:</label>
+                        <Select name="groupcolor" value={editColor} onChange={handleColorChange} required>
+                            <option value="laranja">&#x1F7E0; Laranja</option>
+                            <option value="azul">&#x1F535; Azul</option>
+                            <option value="roxo">&#x1F7E3; Roxo</option>
+                        </Select>
                     </div>
-                    <div style={{display: "flex", flexFlow: "row nowrap", justifyContent: "flex-end" , gap: "5px"}}>
+                    <div style={{display: "flex", flexFlow: "row nowrap", justifyContent: "flex-end", gap: "5px"}}>
                         <FallBackButton text="Voltar" onClick={onCancel}/>
                         <ActionButton text="Criar grupo" onClick={onAction}/>
                     </div>

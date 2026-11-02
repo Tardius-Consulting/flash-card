@@ -1,4 +1,5 @@
 import { ISOString } from "../../shared/ISOString"
+import { GroupDB } from "../repository/GroupDB";
 
 export class Group{
     private constructor(
@@ -17,7 +18,11 @@ export class Group{
     public static hidrate(id:string, color:string, name:string, lastReviewed:ISOString, nextReview:ISOString):Group{
         return new Group(id, color, name,lastReviewed,nextReview);
     }
-    public toState(){
+    public update(color:string, name:string):void{
+        this.color = color;
+        this.name = name
+    }
+    public toState(): GroupDB{
         return {
             id:this.id,
             color:this.color,

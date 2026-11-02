@@ -1,9 +1,7 @@
-export class GroupDB{
-    constructor(
-        private id:string, 
-        private color:string,
-        private name:string,
-        private lastReviewed:string, 
-        private nextReview:string){}
-    
+export interface GroupDB{
+    id:string, 
+    color:string,
+    name:string,
+    lastReviewed:string, 
+    nextReview:string
 }
