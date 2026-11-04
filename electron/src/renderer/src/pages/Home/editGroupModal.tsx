@@ -40,7 +40,7 @@ export default function Index({onCancel}:{onCancel:()=>void}){
                     </div>
                     <div style={{display: "flex", flexFlow: "row nowrap", justifyContent: "flex-end", gap: "5px"}}>
                         <FallBackButton text="Voltar" onClick={onCancel}/>
-                        <ActionButton text="Criar grupo" onClick={onAction}/>
+                        <ActionButton text="Salvar" onClick={onAction}/>
                     </div>
                 </form>
             </div>
