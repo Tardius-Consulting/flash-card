@@ -1,12 +1,14 @@
 import React from "react"
+import selectArrow from "../../../../../../../images/selectarrow.png"
 
 const defaultStyle: React.CSSProperties = {
   appearance: "none", 
   WebkitAppearance: "none", 
   MozAppearance: "none", 
-  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23333' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")`, 
+  backgroundImage: `url(${selectArrow})`, 
+  backgroundSize: "15px",
   backgroundRepeat: "no-repeat", 
-  backgroundPosition: "right 6px center", 
+  backgroundPosition: "right 12px center", 
   width: "100%", 
   padding: "6px 10px", 
   border: "1px solid black", 
@@ -14,12 +16,14 @@ const defaultStyle: React.CSSProperties = {
   fontSize: "1rem"
 }
 
-export function Select({children, style, value, onChange, name, required}:{children?: React.ReactNode, style?: React.CSSProperties, value?: string, onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void, name?: string, required?: boolean}){
+export type GroupColor = "laranja"|"azul"|"roxo"|"amarelo"|"vermelho"|"verde"|"branco"
+
+export function Select({children, style, value, onChange, name}:{children?: React.ReactNode, style?: React.CSSProperties, value: GroupColor, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void, name?: string}){
   return(<select 
     name={name}
     value={value}
     onChange={onChange}
-    required={required}
+    required
     style={{
         ...defaultStyle,
         ...style
