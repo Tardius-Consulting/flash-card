@@ -16,12 +16,14 @@ const defaultStyle: React.CSSProperties = {
   fontSize: "1rem"
 }
 
-export function Select({children, style, value, onChange, name, required}:{children?: React.ReactNode, style?: React.CSSProperties, value?: string, onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void, name?: string, required?: boolean}){
+export type GroupColor = "laranja"|"azul"|"roxo"|"amarelo"|"vermelho"|"verde"|"branco"
+
+export function Select({children, style, value, onChange, name}:{children?: React.ReactNode, style?: React.CSSProperties, value: GroupColor, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void, name?: string}){
   return(<select 
     name={name}
     value={value}
     onChange={onChange}
-    required={required}
+    required
     style={{
         ...defaultStyle,
         ...style
