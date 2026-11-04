@@ -29,7 +29,11 @@ export default function Index({onCancel}:{onCancel:()=>void}){
                     <div>
                         <label style={{display: "block", padding: "10px 0px"}} htmlFor="GroupColor">Cor do grupo:</label>
                         <Select name="groupcolor" value={color} onChange={handleColorChange}>
+                            <option value="branco">&#x26AA; Branco</option>
+                            <option value="amarelo">&#x1F7E1; Amarelo</option>
                             <option value="laranja">&#x1F7E0; Laranja</option>
+                            <option value="vermelho">&#x1F534; Vermelho</option>
+                            <option value="verde">&#x1F7E2; Verde</option>
                             <option value="azul">&#x1F535; Azul</option>
                             <option value="roxo">&#x1F7E3; Roxo</option>
                         </Select>
