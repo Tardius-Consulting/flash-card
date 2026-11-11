@@ -16,7 +16,15 @@ const defaultStyle: React.CSSProperties = {
   fontSize: "1rem"
 }
 
-export type GroupColor = "laranja"|"azul"|"roxo"|"amarelo"|"vermelho"|"verde"|"branco"
+export enum GroupColor {
+  Laranja = "laranja",
+  Azul = "azul",
+  Roxo = "roxo",
+  Amarelo = "amarelo",
+  Vermelho = "vermelho",
+  Verde = "verde",
+  Branco = "branco"
+}
 
 export function Select({value, onChange, children, name, style}:{value: GroupColor, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void, children?: React.ReactNode, name?: string, style?: React.CSSProperties}){
   return(<select 

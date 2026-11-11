@@ -6,7 +6,7 @@ import { Input } from "./Shared/Input"
 
 export default function Index({onCancel}:{onCancel:()=>void}){
     const [editNomeGrupo, setEditNomeGrupo] = React.useState<string>("")
-    const [editColor, setEditColor] = React.useState<GroupColor>("branco")
+    const [editColor, setEditColor] = React.useState<GroupColor>(GroupColor.Branco)
 
     const handleNomeGrupoChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
         setEditNomeGrupo(e.target.value);
