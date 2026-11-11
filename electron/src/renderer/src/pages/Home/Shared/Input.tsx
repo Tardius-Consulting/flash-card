@@ -8,7 +8,7 @@ const defaultStyle: React.CSSProperties = {
   fontSize: "1rem"
 }
 
-export function Input({style, value, onChange, name, type, placeholder, minLength}:{style?: React.CSSProperties, value: string, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, name?: string, type: React.HTMLInputTypeAttribute, placeholder?: string, minLength?: number}){
+export function Input({type, value, onChange, style, name, placeholder, minLength}:{type: React.HTMLInputTypeAttribute, value: string, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, style?: React.CSSProperties, name?: string, placeholder?: string, minLength?: number}){
   return(<input 
     type={type}
     name={name}
