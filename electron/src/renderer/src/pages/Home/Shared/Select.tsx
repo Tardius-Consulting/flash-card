@@ -18,7 +18,7 @@ const defaultStyle: React.CSSProperties = {
 
 export type GroupColor = "laranja"|"azul"|"roxo"|"amarelo"|"vermelho"|"verde"|"branco"
 
-export function Select({children, style, value, onChange, name}:{children?: React.ReactNode, style?: React.CSSProperties, value: GroupColor, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void, name?: string}){
+export function Select({value, onChange, children, name, style}:{value: GroupColor, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void, children?: React.ReactNode, name?: string, style?: React.CSSProperties}){
   return(<select 
     name={name}
     value={value}
