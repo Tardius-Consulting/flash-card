@@ -16,15 +16,6 @@ const defaultStyle: React.CSSProperties = {
   fontSize: "1rem"
 }
 
-export enum GroupColor {
-  Laranja = "laranja",
-  Azul = "azul",
-  Roxo = "roxo",
-  Amarelo = "amarelo",
-  Vermelho = "vermelho",
-  Verde = "verde",
-  Branco = "branco"
-}
 export const selectColors = {
     branco: { text: "Branco", emoji: "⚪" },
     amarelo: { text: "Amarelo", emoji: "🟡" },
@@ -35,6 +26,7 @@ export const selectColors = {
     roxo: { text: "Roxo", emoji: "🟣" },
 } as const;
 
+export type GroupColor = keyof typeof selectColors;
 
 export function Select({value, onChange, children, name, style}:{value: GroupColor, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void, children?: React.ReactNode, name?: string, style?: React.CSSProperties}){
   return(<select 
