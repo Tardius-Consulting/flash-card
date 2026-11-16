@@ -25,6 +25,16 @@ export enum GroupColor {
   Verde = "verde",
   Branco = "branco"
 }
+export const selectColors = {
+    branco: { text: "Branco", emoji: "⚪" },
+    amarelo: { text: "Amarelo", emoji: "🟡" },
+    laranja: { text: "Laranja", emoji: "🟠" },
+    vermelho: { text: "Vermelho", emoji: "🔴" },
+    verde: { text: "Verde", emoji: "🟢" },
+    azul: { text: "Azul", emoji: "🔵" },
+    roxo: { text: "Roxo", emoji: "🟣" },
+} as const;
+
 
 export function Select({value, onChange, children, name, style}:{value: GroupColor, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void, children?: React.ReactNode, name?: string, style?: React.CSSProperties}){
   return(<select 
