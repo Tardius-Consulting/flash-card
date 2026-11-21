@@ -5,15 +5,15 @@ import { GroupColor, Select, selectColors } from "./Shared/Select"
 import { Input } from "./Shared/Input"
 
 export default function Index({onCancel}:{onCancel:()=>void}){
-    const [editNomeGrupo, setEditNomeGrupo] = React.useState<string>("")
-    const [editColor, setEditColor] = React.useState<GroupColor>("branco")
+    const [nomeGrupo, setNomeGrupo] = React.useState<string>("")
+    const [color, setColor] = React.useState<GroupColor>("branco")
 
     const handleNomeGrupoChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
-        setEditNomeGrupo(e.target.value);
+        setNomeGrupo(e.target.value);
     }
 
     const handleColorChange = (e: React.ChangeEvent<HTMLSelectElement>)=>{
-        setEditColor(e.target.value as GroupColor);
+        setColor(e.target.value as GroupColor);
     }
 
     const onAction = ()=>{}
