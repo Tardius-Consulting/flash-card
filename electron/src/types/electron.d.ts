@@ -1,3 +1,5 @@
+import type { Group } from '../shared/types/group';
+
 export interface IAuthAPI{
     login(email:string,password:string):Promise<{ok:boolean,message:string}>
     me():Promise<{ok:boolean,message:string}>
@@ -25,4 +27,16 @@ declare global{
         rendererAPI:IRendererAPI,
         reviewAPI:IReviewAPI
     }
+}
+
+export interface ElectronApi {
+  groups: {
+    list: (search?: string) => Promise<Group[]>;
+  };
+}
+
+declare global {
+  interface Window {
+    api: ElectronApi;
+  }
 }

@@ -4,6 +4,11 @@ import { Input } from "./Input"
 import { GroupColor, Select, selectColors } from "./Select"
 import { ActionButton, FallBackButton } from "./Button"
 
+export interface Group {
+  id: number;
+  name: string;
+}
+
 export function Group({onCancel, onAction, nomeGrupo, handleNomeGrupoChange, color, handleColorChange, actionButtonText}:{onCancel: ()=> void, onAction: ()=> void, nomeGrupo: string, handleNomeGrupoChange: (e: React.ChangeEvent<HTMLInputElement>) => void, color: GroupColor, handleColorChange: (e: React.ChangeEvent<HTMLSelectElement>) => void, actionButtonText: string}){
   return(
     <Modal onExit={onCancel}>
