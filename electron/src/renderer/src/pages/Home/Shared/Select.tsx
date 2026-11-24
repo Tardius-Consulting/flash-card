@@ -16,19 +16,19 @@ const defaultStyle: React.CSSProperties = {
   fontSize: "1rem"
 }
 
-export const selectColors = {
-    branco: { text: "Branco", emoji: "⚪" },
-    amarelo: { text: "Amarelo", emoji: "🟡" },
-    laranja: { text: "Laranja", emoji: "🟠" },
-    vermelho: { text: "Vermelho", emoji: "🔴" },
-    verde: { text: "Verde", emoji: "🟢" },
-    azul: { text: "Azul", emoji: "🔵" },
-    roxo: { text: "Roxo", emoji: "🟣" },
-} as const;
+export const selectColors = [
+    {id:"whitw", text: "Branco", emoji: "⚪" },
+    {id:"yellow", text: "Amarelo", emoji: "🟡" },
+    {id:"orange", text: "Laranja", emoji: "🟠" },
+    {id:"#F00", text: "Vermelho", emoji: "🔴" },
+    {id:"#0F0", text: "Verde", emoji: "🟢" },
+    {id:"#00F", text: "Azul", emoji: "🔵" },
+    {id:"rgba(255,0,255,1)", text: "Roxo", emoji: "🟣" },
+] as const;
 
-export type GroupColor = keyof typeof selectColors;
+export type GroupColor = {id:string, text:string,emoji:string};
 
-export function Select({value, onChange, children, name, style}:{value: GroupColor, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void, children?: React.ReactNode, name?: string, style?: React.CSSProperties}){
+export function Select({value, onChange, children, name, style}:{value: string|number, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void, children?: React.ReactNode, name?: string, style?: React.CSSProperties}){
   return(<select 
     name={name}
     value={value}
