@@ -2,7 +2,7 @@ import { Card } from "../model/Card";
 import { CreateCardData } from "../repository/CreateCardData";
 import { ICardRepository } from "../repository/ICardRepository";
 
-class CriarCard {
+export class CriarCard {
 
     constructor(
         private _repository:ICardRepository

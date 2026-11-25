@@ -3,13 +3,14 @@ import { MockCardRepository } from "./repository/MockCardRepository";
 import { GetReviewListUseCase } from "./useCases/GetReviewListUseCase";
 import { RegisterReviewUseCase } from "./useCases/RegisterReviewUseCase";
 import { validateSession } from "../shared/ValidateSession";
+import { CriarCard } from "./useCases/CriarCard";
+import { CreateCardData } from "./repository/CreateCardData";
 
 const cardRepository = new MockCardRepository();
-const getReviewListUseCase = new GetReviewListUseCase(cardRepository);
-const registerReviewUseCase = new RegisterReviewUseCase(cardRepository);
  
 ipcMain.handle('review:register', async (event, groupID, cards) => {
     try {
+    const registerReviewUseCase = new RegisterReviewUseCase(cardRepository);
     await validateSession(async (userID) => {
         await registerReviewUseCase.execute(userID, cards);
     });
@@ -21,6 +22,7 @@ ipcMain.handle('review:register', async (event, groupID, cards) => {
 
 ipcMain.handle('review:getList', async (event, groupID: string) => {
     try {
+    const getReviewListUseCase = new GetReviewListUseCase(cardRepository);
     let reviewList;
     await validateSession(async (userID) => {
         reviewList = await getReviewListUseCase.execute(userID, groupID);
@@ -28,5 +30,16 @@ ipcMain.handle('review:getList', async (event, groupID: string) => {
     return reviewList;
     } catch (error) {
         return { ok: false, message: 'Failed to get review list, '+ error.message };
+    }
+});
+
+ipcMain.handle('card:create', async (event, data: CreateCardData) => {
+    try {
+    const createCard = new CriarCard(cardRepository);
+    await validateSession(async (userID) => {
+        await createCard.execute(userID, data);
+    });
+    } catch (error) {
+        return { ok: false, message: 'Failed to create card, '+ error.message };
     }
 });
