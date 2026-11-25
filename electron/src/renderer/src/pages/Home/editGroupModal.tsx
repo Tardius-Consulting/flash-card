@@ -1,10 +1,12 @@
 import React from "react"
 import { selectColors } from "./Shared/Select"
 import { Group } from "./Shared/Group"
+import { GroupGateway } from "../../Infrastructure/ElectronGroupGateway"
+import { GroupDB } from "../../../../main/group/repository/GroupDB"
 
-export default function Index({onCancel}:{onCancel:()=>void}){
-    const [nomeGrupo, setNomeGrupo] = React.useState<string>("")
-    const [color, setColor] = React.useState(0)
+export default function Index({onCancel,group}:{onCancel:()=>void,group:GroupDB}){
+    const [nomeGrupo, setNomeGrupo] = React.useState<string>(group.name)
+    const [color, setColor] = React.useState(selectColors[group.color])
 
     const handleNomeGrupoChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
         setNomeGrupo(e.target.value);
@@ -15,9 +17,19 @@ export default function Index({onCancel}:{onCancel:()=>void}){
       setColor(index);
     }
     
-  const onAction = ()=>{
-    const cor = selectColors[color]
-    const name = nomeGrupo
+  const onAction = async()=>{
+    try{
+      const cor = selectColors[color].id.trim()
+      const name = nomeGrupo.trim()
+      if(cor as string == ""||name=="")
+        throw new Error("nome e cor não podem ficar vazios")
+      let gateway = new GroupGateway();
+      await gateway.edit({...group,color:cor,name})
+      onCancel()
+    }catch(err){
+        alert(err.message)
+        onCancel()
+      }
   }
 
   return(

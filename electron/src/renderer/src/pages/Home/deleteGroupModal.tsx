@@ -1,9 +1,22 @@
 import React from "react"
 import Modal from "./Shared/Modal"
 import { ActionButton, FallBackButton } from "./Shared/Button"
+import { GroupGateway } from "../../Infrastructure/ElectronGroupGateway"
 
-export default function Index({onCancel}:{onCancel:()=>void}){
-    const onAction = ()=>{}
+export default function Index({onCancel,id}:{onCancel:()=>void,id:string}){
+    const onAction = async()=>{
+      try{
+        const groupId = id.trim()
+        if(groupId == "")
+          throw new Error("Nenhum id informado")
+        let gateway = new GroupGateway()
+        await gateway.delete(groupId)
+        onCancel()
+      }catch(err){
+        alert(err.message)
+        onCancel()
+      }
+    }
 
     return(
         <Modal onExit={onCancel}>

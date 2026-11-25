@@ -1,8 +1,9 @@
 import React from "react"
 import {ActionButton,FallBackButton} from "../Shared/Button" 
 import Modal from "../Shared/Modal"
+import { CardGateway } from "../../../Infrastructure/ElectronCardGateway"
 
-function index({onCancel}:{onCancel:()=>void}){
+function index({onCancel,groupId="default"}:{groupId:string,onCancel:()=>void}){
     const [pergunta, setPergunta] = React.useState<string>("")
     const [resposta, setResposta] = React.useState<string>("")
 
@@ -14,7 +15,21 @@ function index({onCancel}:{onCancel:()=>void}){
         setResposta(e.target.value)
     }
 
-    const onAction = ()=>{}
+    const onAction = async()=>{
+      try{
+        const gateway = new CardGateway()
+        const ask = pergunta.trim()
+        const answer =resposta.trim()
+        const gId =groupId.trim()
+        if(ask == ""||answer==""||gId=="")
+          throw new Error("Pergunta, resposta ou grupo não podem ficar vazios")
+        await gateway.create({pergunta:ask,resposta:answer,groupid:gId})
+        onCancel()
+      }catch(err){
+        alert(err.message)
+        onCancel()
+      }
+    }
 
     return(
         <Modal onExit={onCancel}>
