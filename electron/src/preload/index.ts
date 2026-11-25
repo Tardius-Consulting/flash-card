@@ -3,12 +3,15 @@
 import { contextBridge, ipcRenderer } from "electron"
 import auth from "./auth.preload.js"
 import review from "./review.preload.js"
-import type { IElectronAPI, IRendererAPI, ICardAPI } from "../types/electron.js"
+import card from "./card.preload.js"
+import group from "./group.preload.js"
+
+import type { IElectronAPI, IRendererAPI, ICardAPI, IReviewAPI, IGroupAPI } from "../types/electron.js"
 const api:IElectronAPI = {
     ...auth
 }
 
-const reviewAPI:ICardAPI = {
+const reviewAPI:IReviewAPI = {
     ...review
 }
 
@@ -17,6 +20,17 @@ const renderer:IRendererAPI = {
         ipcRenderer.on("render:authResult",(event,...args)=>callback(args))
     }
 }
+
+const cardAPI:ICardAPI = {
+    ...card
+}
+
+const groupAPI:IGroupAPI = {
+    ...group
+}
+
 contextBridge.exposeInMainWorld('electronAPI',api)
 contextBridge.exposeInMainWorld('rendererAPI',renderer)
 contextBridge.exposeInMainWorld('reviewAPI',reviewAPI)
+contextBridge.exposeInMainWorld('cardAPI',cardAPI)
+contextBridge.exposeInMainWorld('groupAPI',groupAPI)
