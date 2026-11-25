@@ -1,6 +1,7 @@
 import React from "react"
 import { GroupColor, selectColors } from "./Shared/Select"
 import { Group } from "./Shared/Group"
+import { GroupGateway } from "../../Infrastructure/ElectronGroupGateway"
 
 export default function Index({onCancel}:{onCancel:()=>void}){
     const [nomeGrupo, setNomeGrupo] = React.useState<string>("")
@@ -15,9 +16,19 @@ export default function Index({onCancel}:{onCancel:()=>void}){
       setColor(index);
     }
 
-    const onAction = ()=>{
-      const cor = selectColors[color]
-      const name = nomeGrupo
+    const onAction = async()=>{
+      try{
+        const cor = selectColors[color].id.trim()
+        const name = nomeGrupo.trim()
+        if(cor as string == ""||name=="")
+          throw new Error("nome e cor não podem ficar vazios")
+        let gateway = new GroupGateway();
+        await gateway.create({color:cor,name})
+        onCancel()
+      }catch(err){
+        alert(err.message)
+        onCancel()
+      }
     }
 
     return(

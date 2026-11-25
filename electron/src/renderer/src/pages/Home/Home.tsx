@@ -7,6 +7,7 @@ import { ReviewScreem } from "./Group/Review"
 import CreateGroupModal  from "./createGroupModal"
 import EditGroupModal from "./editGroupModal"
 import DeleteGroupModal from "./deleteGroupModal"
+import { selectColors } from "./Shared/Select"
 
 export default function HomeScreem({reviewRepository}:{reviewRepository:IReviewRepository}){
     const [pendingReview,setPendingReview] = React.useState(false)
@@ -30,8 +31,8 @@ export default function HomeScreem({reviewRepository}:{reviewRepository:IReviewR
         <ReviewScreem reviewRepository={reviewRepository}/>
       </ReviewModal>
     }
-    {deleteGroup && <DeleteGroupModal onCancel={()=>setDeleteGroup(false)}/>}
-    {editGroup && <EditGroupModal onCancel={()=>setEditGroup(false)}/>}
+    {deleteGroup && <DeleteGroupModal id="teste" onCancel={()=>setDeleteGroup(false)}/>}
+    {editGroup && <EditGroupModal group={{id:"teste",color:selectColors[2].id,name:"teste2",lastReviewed:new Date().toISOString(),nextReview:new Date().toISOString()}} onCancel={()=>setEditGroup(false)}/>}
     {createGroup && <CreateGroupModal onCancel={()=>setCreateGroup(false)}/>}
     <ActionButton onClick={()=>setCreateGroup(true)} text="Criar grupo"/>
     <ActionButton onClick={()=>setEditGroup(true)} text="Editar grupo"/>
