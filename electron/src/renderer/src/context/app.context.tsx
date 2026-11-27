@@ -23,7 +23,7 @@ export function AppProvider({children, gateway}:{children:ReactNode,gateway:IAut
         const result = await gateway.me()
         if(!result.ok) navigate('/Login')
       }catch(err){
-        console.log(err.message)
+        console.log(err)
         navigate('/Login')
       }
     }

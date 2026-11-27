@@ -17,7 +17,7 @@ export class SQLiteCardRepository implements ICardRepository{
   async registerCard(userID: string, card: Card) {
     const data = card.toState()
     const stmt = this._db.prepare(
-      "INSERT INTO Cards (id, user_id, group_id, front, back, box) VALUES (?, ?, ?, ?, ?, ?)"
+      "INSERT INTO Cards (id, user_id, group_id, ask, answer, box) VALUES (?, ?, ?, ?, ?, ?)"
     );
 
     stmt.run(
@@ -33,7 +33,7 @@ export class SQLiteCardRepository implements ICardRepository{
   async update(userID: string, card:Card) {
     const {ask,answer, id} = card.toState()
     const stmt = this._db.prepare(
-      "UPDATE Cards SET front = ?, back = ? WHERE id = ? AND user_id = ?"
+      "UPDATE Cards SET ask = ?, answer = ? WHERE id = ? AND user_id = ?"
     );
 
     const result = stmt.run(ask, answer, id, userID);
@@ -53,7 +53,7 @@ export class SQLiteCardRepository implements ICardRepository{
 
   async getCardList(userID: string, groupID: string): Promise<CardDTO[]> {
       const stmt = this._db.prepare(`
-        SELECT *
+        SELECT id, group_id, ask, answer, box
         FROM Cards
         WHERE user_id = ? AND group_id = ?
       `);

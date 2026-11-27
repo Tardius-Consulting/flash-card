@@ -14,9 +14,6 @@ export class SQLiteGroupRepository implements IGroupRepository{
       "INSERT INTO Groups (id, user_id, color, name, lastReviewed, nextReview) VALUES (?, ?, ?, ?, ?, ?)"
     );
 
-    console.log(`INSERT INTO Groups (id, user_id, color, name, lastReviewed, nextReview) VALUES (${data.id, userid, 
-      data.color, data.name, data.lastReviewed, data.nextReview})`)
-
     stmt.run(
       data.id,
       userid,

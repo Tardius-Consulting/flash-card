@@ -24,9 +24,7 @@ function Index(){
     useEffect(()=>{
         if(!definedList) return
         let index = 0
-        console.log("Lista de revisão: ",list)
         while(index < list.length && list[index].status !== null){
-            console.log("Pulando cartão ",index," pois possui status ",list[index].status)
             index++
         }
         if(index >= list.length){

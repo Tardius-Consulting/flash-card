@@ -4,8 +4,8 @@ export function initCardDB(db:Database){
         id TEXT PRIMARY KEY,
         user_id TEXT NOT NULL,
         group_id TEXT NOT NULL,
-        front TEXT NOT NULL,
-        back TEXT NOT NULL,
+        ask TEXT NOT NULL,
+        answer TEXT NOT NULL,
         box INTEGER NOT NULL DEFAULT 1
     )`).run()
 

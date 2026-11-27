@@ -68,6 +68,7 @@ const GroupCard = ({group,setEdit,navigate}:{navigate: NavigateFunction,group:Gr
   };
 
   return<button 
+      key={group.id}
       type="button"
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
@@ -104,7 +105,7 @@ export default function Index({createGroup,setEdit}:{setEdit:(g:GroupDB)=>void,c
       gap:"20px"
     }}
   >
-    <div onClick={()=>createGroup(true)} style={{...groupStyle,backgroundColor:"#007",color:"#ddd"}}>
+    <div key={0} onClick={()=>createGroup(true)} style={{...groupStyle,backgroundColor:"#007",color:"#ddd"}}>
       <span style={{fontSize:"25px"}}>+</span>
     </div>
     {

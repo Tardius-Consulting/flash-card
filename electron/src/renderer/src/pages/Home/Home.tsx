@@ -17,7 +17,9 @@ export default function HomeScreem({reviewRepository}:{reviewRepository:IReviewR
     return<div
       style={{
         width:"100%",
-        height:"100%"
+        height:"100%",
+        display:"flex",
+        flexDirection:"column"
       }}
     >
     {editGroup && <EditGroupModal group={group} onCancel={()=>setEditGroup(false)}/>}
@@ -27,7 +29,7 @@ export default function HomeScreem({reviewRepository}:{reviewRepository:IReviewR
     <GroupList setEdit={(g:GroupDB)=>{setGroup(g);setLongPress(true)}} createGroup={setCreateGroup}/>
     <div style={{
       display:longPress?"flex":"none",
-      height:"100%",
+      flexGrow:1,
       justifyContent:"end",
       alignItems:"end",
 
