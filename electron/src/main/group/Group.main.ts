@@ -6,6 +6,7 @@ import { Group } from "./model/Group";
 import { validateSession } from "../shared/ValidateSession";
 import { EditGroup } from "./useCases/EditGroup";
 import { DeleteGroup } from "./useCases/DeleteGroup";
+import { GroupDB } from "./repository/GroupDB";
 
 const repository:IGroupRepository={
   create: function (userid: string, group: Group): Promise<void> {
@@ -19,10 +20,13 @@ const repository:IGroupRepository={
   },
   getByID: function (userid: string, groupid: string): Promise<Group | null> {
     throw new Error("Function not implemented.");
+  },
+  getList: function (userid: string): Promise<GroupDB[]> {
+    throw new Error("Function not implemented.");
   }
 }
 
-ipcMain.handle('card:create', async (event, data: CreateGroupDTO) => {
+ipcMain.handle('group:create', async (event, data: CreateGroupDTO) => {
     try {
     const createGroup = new CreateGroup(repository);
     await validateSession(async (userID) => {
@@ -33,7 +37,7 @@ ipcMain.handle('card:create', async (event, data: CreateGroupDTO) => {
     }
 });
 
-ipcMain.handle('card:edit', async (event, data: EditGroupDTO) => {
+ipcMain.handle('group:edit', async (event, data: EditGroupDTO) => {
     try {
     const editGroup = new EditGroup(repository);
     await validateSession(async (userID) => {
@@ -44,7 +48,7 @@ ipcMain.handle('card:edit', async (event, data: EditGroupDTO) => {
     }
 });
 
-ipcMain.handle('card:delete', async (event, id: string) => {
+ipcMain.handle('group:delete', async (event, id: string) => {
     try {
     const deleteGroup = new DeleteGroup(repository);
     await validateSession(async (userID) => {

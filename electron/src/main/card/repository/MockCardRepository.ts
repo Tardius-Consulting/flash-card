@@ -49,9 +49,21 @@ const cards = [
             }
         ]
 export class MockCardRepository implements ICardRepository{
+    update(userID: string, card: Card): Promise<void> {
+      throw new Error("Method not implemented.");
+    }
+    delete(userID: string, cardID: string) {
+      throw new Error("Method not implemented.");
+    }
     public async getCardList(userID: string, groupID: string): Promise<Card[]> {
         const list = cards.filter(card => card.userID === userID && card.groupID === groupID);
-        return list.map((card) => Card.hydrate(card.id, card.ask, card.answer, card.groupID, card.box as 1|2|3|4));
+        return list.map((card) => Card.hydrate({
+          ask:card.ask, 
+          answer:card.answer, 
+          groupID:card.groupID, 
+          box:card.box as 1|2|3|4,
+          id:card.id
+        }));
     }
     public async registerReview(userID: string, cards: Review[]): Promise<void> {
         console.log(`Registrando revisão para o usuário ${userID}:`, cards);

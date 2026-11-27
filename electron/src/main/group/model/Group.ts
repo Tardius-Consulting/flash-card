@@ -15,7 +15,7 @@ export class Group{
         const nextReview = new ISOString(new Date(Date.now() + 7 * 24 * 60 * 60 * 1000));
         return new Group(id, color, name, lastReviewed, nextReview);
     }
-    public static hidrate(id:string, color:string, name:string, lastReviewed:ISOString, nextReview:ISOString):Group{
+    public static hidrate({id, color, name, lastReviewed, nextReview}:{id:string, color:string, name:string, lastReviewed:ISOString, nextReview:ISOString}):Group{
         return new Group(id, color, name,lastReviewed,nextReview);
     }
     public update(color:string, name:string):void{

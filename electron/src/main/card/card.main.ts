@@ -5,8 +5,13 @@ import { RegisterReviewUseCase } from "./useCases/RegisterReviewUseCase";
 import { validateSession } from "../shared/ValidateSession";
 import { CriarCard } from "./useCases/CriarCard";
 import { CreateCardData } from "./repository/CreateCardData";
+import { UpdateCard } from "./useCases/UpdateCard";
+import { CardDTO } from "../../types/card.dto";
+import { DeleteCard } from "./useCases/DeleteCard";
+import { SQLiteCardRepository } from "./repository/SQLiteCardRepository";
+import db from "../db.js"
 
-const cardRepository = new MockCardRepository();
+const cardRepository = new SQLiteCardRepository(db);
  
 ipcMain.handle('review:register', async (event, groupID, cards) => {
     try {
@@ -41,5 +46,27 @@ ipcMain.handle('card:create', async (event, data: CreateCardData) => {
     });
     } catch (error) {
         return { ok: false, message: 'Failed to create card, '+ error.message };
+    }
+});
+
+ipcMain.handle('card:edit', async (event, data: CardDTO) => {
+    try {
+    const updateCard = new UpdateCard(cardRepository);
+    await validateSession(async (userID) => {
+        await updateCard.execute(userID, data);
+    });
+    } catch (error) {
+        return { ok: false, message: 'Failed to update card, '+ error.message };
+    }
+});
+
+ipcMain.handle('card:delete', async (event, data: string) => {
+    try {
+    const deleteCard = new DeleteCard(cardRepository);
+    await validateSession(async (userID) => {
+        await deleteCard.execute(userID, data);
+    });
+    } catch (error) {
+        return { ok: false, message: 'Failed to delete card, '+ error.message };
     }
 });
