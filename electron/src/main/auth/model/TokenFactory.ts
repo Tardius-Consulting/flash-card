@@ -56,7 +56,10 @@ export class TokenFactory implements ITokenFactory{
         }
 
         // Decodifica o payload
-        const payload = JSON.parse(this.base64UrlDecode(encodedPayload));
+        const jsonString = this.base64UrlDecode(encodedPayload)
+        const payload = JSON.parse(jsonString);
+        if(!payload.sub)
+          payload.sub = payload.meta.id
 
         // Verifica se o token expirou (caso possua a claim 'exp')
         if (payload.exp && Date.now() >= payload.exp * 1000) {

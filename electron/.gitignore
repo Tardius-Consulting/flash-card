@@ -94,3 +94,5 @@ out/
 # SQLite 
 *.db
 *.sqlite
+*.sqlite-shm
+*.sqlite-wal

@@ -11,8 +11,11 @@ export class SQLiteGroupRepository implements IGroupRepository{
   async create(userid: string, group: Group): Promise<void> {
     const data = group.toState()
     const stmt = this._db.prepare(
-      "INSERT INTO Group (id, user_id, color, name, lastReviewed, nextReview) VALUES (?, ?, ?, ?, ?, ?, ?)"
+      "INSERT INTO Groups (id, user_id, color, name, lastReviewed, nextReview) VALUES (?, ?, ?, ?, ?, ?)"
     );
+
+    console.log(`INSERT INTO Groups (id, user_id, color, name, lastReviewed, nextReview) VALUES (${data.id, userid, 
+      data.color, data.name, data.lastReviewed, data.nextReview})`)
 
     stmt.run(
       data.id,
@@ -27,7 +30,7 @@ export class SQLiteGroupRepository implements IGroupRepository{
   async edit(userid: string, group: Group): Promise<void> {
     const data = group.toState()
     const stmt = this._db.prepare(
-      "UPDATE Group SET color = ?, name = ?, lastReviewed = ?, nextReview = ? WHERE id = ? AND user_id = ?"
+      "UPDATE Groups SET color = ?, name = ?, lastReviewed = ?, nextReview = ? WHERE id = ? AND user_id = ?"
     );
 
     const result = stmt.run(data.color, data.name, data.lastReviewed, data.nextReview, data.id, userid);
@@ -37,7 +40,7 @@ export class SQLiteGroupRepository implements IGroupRepository{
 
   async delete(userid: string, groupid: string): Promise<void> {
     const stmt = this._db.prepare(
-      "DELETE FROM Group WHERE id = ? AND user_id = ?"
+      "DELETE FROM Groups WHERE id = ? AND user_id = ?"
     );
 
     const result = stmt.run(groupid, userid);
@@ -48,7 +51,7 @@ export class SQLiteGroupRepository implements IGroupRepository{
   async getByID(userid: string, groupid: string): Promise<Group | null> {
     const stmt = this._db.prepare(`
       SELECT id, color, name, lastReviewed, nextReview
-      FROM Group
+      FROM Groups
       WHERE id = ? AND user_id = ?
     `);
 
@@ -71,7 +74,7 @@ export class SQLiteGroupRepository implements IGroupRepository{
   async getList(userid: string): Promise<GroupDB[]> {
     const stmt = this._db.prepare(`
       SELECT id, color, name, lastReviewed, nextReview
-      FROM Group
+      FROM Groups
       WHERE user_id = ?
       ORDER BY name DESC
     `);

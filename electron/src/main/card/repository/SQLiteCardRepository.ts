@@ -2,6 +2,7 @@ import Database from "better-sqlite3"
 import { ICardRepository } from "./ICardRepository";
 import { Card } from "../model/Card";
 import { Review } from "../model/Review";
+import { CardDTO } from "../../../types/card.dto";
 export class SQLiteCardRepository implements ICardRepository{
 
     constructor(private _db:Database){}
@@ -16,7 +17,7 @@ export class SQLiteCardRepository implements ICardRepository{
   async registerCard(userID: string, card: Card) {
     const data = card.toState()
     const stmt = this._db.prepare(
-      "INSERT INTO Cards (id, user_id, group_id, front, back, box, due_date) VALUES (?, ?, ?, ?, ?, ?, ?)"
+      "INSERT INTO Cards (id, user_id, group_id, front, back, box) VALUES (?, ?, ?, ?, ?, ?)"
     );
 
     stmt.run(
@@ -50,7 +51,14 @@ export class SQLiteCardRepository implements ICardRepository{
       throw new Error("Nenhum item deletado!");
   }
 
-  async getCardList(userID: string, groupID: string): Promise<Card[]> {
-    throw new Error("Method not implemented.");
+  async getCardList(userID: string, groupID: string): Promise<CardDTO[]> {
+      const stmt = this._db.prepare(`
+        SELECT *
+        FROM Cards
+        WHERE user_id = ? AND group_id = ?
+      `);
+  
+      const rows = stmt.all(userID,groupID) as CardDTO[];
+      return rows;
   }
 }
