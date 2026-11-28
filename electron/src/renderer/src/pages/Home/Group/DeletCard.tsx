@@ -1,9 +1,14 @@
-import React, { useState } from "react"
 import {ActionButton,FallBackButton} from "../Shared/Button" 
 import Modal from "../Shared/Modal"
+import { CardGateway } from "../../../Infrastructure/ElectronCardGateway"
 
-function index ({onCancel}:{onCancel:()=>void}) {
-    const onAction = ()=>{}
+export default function Index ({onCancel,id}:{id:string,onCancel:()=>void}) {
+    const onAction = async()=>{
+      try{
+        const gateway=new CardGateway()
+        await gateway.delete(id)
+      }catch(err){}
+    }
 
     return(
 

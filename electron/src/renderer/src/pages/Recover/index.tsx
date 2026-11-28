@@ -6,7 +6,7 @@ import { RecoverPassword } from "./RecoverPassword"
 import React from "react"
 import { FallBackButton } from "../Home/Shared/Button"
 
-export function RecoverConteiner({gateway}:{gateway:IAuthGateway}){
+export default function RecoverConteiner({gateway}:{gateway:IAuthGateway}){
     const navigate = useNavigate()
     const [changePassword,setChangePassword] = useState(false)
     const submitChange = async (password:string)=>{

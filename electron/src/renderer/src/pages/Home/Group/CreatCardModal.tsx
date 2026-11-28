@@ -3,7 +3,7 @@ import {ActionButton,FallBackButton} from "../Shared/Button"
 import Modal from "../Shared/Modal"
 import { CardGateway } from "../../../Infrastructure/ElectronCardGateway"
 
-function index({onCancel,groupId="default"}:{groupId:string,onCancel:()=>void}){
+export default function Index({onCancel,groupId="default"}:{groupId:string,onCancel:()=>void}){
     const [pergunta, setPergunta] = React.useState<string>("")
     const [resposta, setResposta] = React.useState<string>("")
 

@@ -31,12 +31,6 @@ export class ReviewList {
     }
 
     public get toState(): CardDTO[] {
-        return this._cards.map((card) => ({
-            id: card.id,
-            status: null,
-            box:card.box,
-            ask: card.ask,
-            answer: card.answer
-        }));
+        return this._cards.map((c) => c.toState());
     }
 }

@@ -12,8 +12,8 @@ export class CardGateway implements ICardRepository{
   public async delete(id:string){
     await window.cardAPI.delete(id)
   }
-  public async getList(){
-    return await window.cardAPI.getList()
+  public async getList(groupID:string){
+    return await window.cardAPI.getList(groupID)
   }
   public async getData(id:string){
     return await window.cardAPI.getData(id)

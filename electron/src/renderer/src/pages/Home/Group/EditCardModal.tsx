@@ -1,10 +1,11 @@
 import React from "react"
 import { ActionButton, FallBackButton } from "../Shared/Button" 
 import Modal from "../Shared/Modal"
+import { CardDTO } from "../../../../../types/card.dto"
 
-function index ({onCancel}: {onCancel:()=>void}){
-    const [EditPergunta, setEditPergunta] = React.useState<string>("")
-    const [EditResposta, setEditResposta] = React.useState<string>("")
+export default function Index ({onCancel,card}: {card:CardDTO,onCancel:()=>void}){
+    const [EditPergunta, setEditPergunta] = React.useState<string>(card.ask)
+    const [EditResposta, setEditResposta] = React.useState<string>(card.answer)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
         setEditPergunta (e.target.value);

@@ -15,8 +15,7 @@ export default function Index({children, onExit}:{children:React.ReactNode,onExi
     }}
   >
     <div className="conteiner" onClick={(e) => e.stopPropagation()} style={{
-      width:"70%", 
-      height:"70%",
+      width:"70%",
       backgroundColor:"#FFF",
       border:"1px solid #00000099", 
       borderRadius:10,

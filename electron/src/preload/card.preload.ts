@@ -7,7 +7,7 @@ const api:ICardAPI = {
   create:async(data:CreateCardData)=>ipcRenderer.invoke('card:create',data),
   edit:async(data:CardDTO)=>ipcRenderer.invoke('card:edit',data),
   delete:async(id:string)=>ipcRenderer.invoke('card:delete',id),
-  getList:async()=>ipcRenderer.invoke('card:getList'),
+  getList:async(groupID:string)=>ipcRenderer.invoke('card:getList',groupID),
   getData:async(id:string)=>ipcRenderer.invoke('card:getData',id)
 }
 

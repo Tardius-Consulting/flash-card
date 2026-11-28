@@ -1,4 +1,3 @@
-import React from 'react';
 import { Route, Routes } from 'react-router'
 import Login from './Login';
 import { ElectronAuthGateway } from '../Infrastructure/ElectronAuthGateway';
@@ -9,9 +8,8 @@ import CardScreem from './Home/Group/Card';
 import GroupConteiner from './Home/Group';
 import HomeConteiner from './Home';
 import { AppProvider } from '../context/app.context';
-import { ReviewScreem } from './Home/Group/Review';
-import { ReviewProvider } from '../context/Review.context';
 import { WebReviewRepository } from '../Infrastructure/WebReviewRepository';
+import RecoverPassword from './Recover';
 
 export default function App() {
 
@@ -32,6 +30,7 @@ export default function App() {
         </Route>
       </Route>
       <Route path='/SignUp' element={<SignUp gateway={authGateway}/>}/>
+      <Route path='/Recover' element={<RecoverPassword gateway={authGateway}/>}/>
     </Routes>
   );
 }

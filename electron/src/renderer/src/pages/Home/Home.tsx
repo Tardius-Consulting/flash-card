@@ -1,45 +1,41 @@
-import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router"
+import { useState } from "react"
 import { IReviewRepository } from "../../Infrastructure/IReviewRepository"
-import { ActionButton } from "./Shared/Button"
-import ReviewModal from "./Shared/Modal"
-import { ReviewScreem } from "./Group/Review"
-import CreateGroupModal  from "./createGroupModal"
+import GroupList from "../../components/GroupList"
+import ReviewComponent from "../../components/ReviewArea"
+import CreateGroupModal from "./createGroupModal"
 import EditGroupModal from "./editGroupModal"
+import { GroupDB } from "../../../../main/group/repository/GroupDB"
 import DeleteGroupModal from "./deleteGroupModal"
-import { selectColors } from "./Shared/Select"
+import { ActionButton } from "./Shared/Button"
 
 export default function HomeScreem({reviewRepository}:{reviewRepository:IReviewRepository}){
-    const [pendingReview,setPendingReview] = React.useState(false)
-    const [deleteGroup,setDeleteGroup] = React.useState(false)
-    const [editGroup,setEditGroup] = React.useState(false)
-    const [createGroup,setCreateGroup] = React.useState(false)
-    const [ review, setReview ] = useState(false);
-    const navigate = useNavigate()
-    useEffect(()=>{
-        const loadState = async()=>{
-            const state = await reviewRepository.validateState()
-            setPendingReview(state)
-        }
-        loadState()
-    },[])
-    return<>
-    {
-      review 
-      && 
-      <ReviewModal onExit={()=>setReview(false)}>
-        <ReviewScreem reviewRepository={reviewRepository}/>
-      </ReviewModal>
-    }
-    {deleteGroup && <DeleteGroupModal id="teste" onCancel={()=>setDeleteGroup(false)}/>}
-    {editGroup && <EditGroupModal group={{id:"teste",color:selectColors[2].id,name:"teste2",lastReviewed:new Date().toISOString(),nextReview:new Date().toISOString()}} onCancel={()=>setEditGroup(false)}/>}
+  const [createGroup,setCreateGroup] = useState(false)
+  const [editGroup,setEditGroup] = useState(false)
+  const [deleteGroup,setDeleteGroup] = useState(false)
+  const [group,setGroup] = useState<GroupDB>()
+  const [longPress,setLongPress] = useState(false)
+    return<div
+      style={{
+        width:"100%",
+        height:"100%",
+        display:"flex",
+        flexDirection:"column"
+      }}
+    >
+    {editGroup && <EditGroupModal group={group} onCancel={()=>setEditGroup(false)}/>}
+    {deleteGroup && <DeleteGroupModal id={group.id} onCancel={()=>setDeleteGroup(false)}/>}
     {createGroup && <CreateGroupModal onCancel={()=>setCreateGroup(false)}/>}
-    <ActionButton onClick={()=>setCreateGroup(true)} text="Criar grupo"/>
-    <ActionButton onClick={()=>setEditGroup(true)} text="Editar grupo"/>
-    <ActionButton onClick={()=>setDeleteGroup(true)} text="Excluir grupo"/>
-    {pendingReview &&
-        <button onClick={()=>navigate('/Review/')}>Continuar revisão</button>
-    }
-    <ActionButton onClick={()=>setReview(true)} text="testar revisão"/>
-    </>
+    <ReviewComponent reviewRepository={reviewRepository}/>
+    <GroupList setEdit={(g:GroupDB)=>{setGroup(g);setLongPress(true)}} createGroup={setCreateGroup}/>
+    <div style={{
+      display:longPress?"flex":"none",
+      flexGrow:1,
+      justifyContent:"end",
+      alignItems:"end",
+
+    }}>
+      <ActionButton onClick={()=>setEditGroup(true)} text="Editar grupo"/>
+      <ActionButton onClick={()=>setDeleteGroup(true)} text="Excluir grupo"/>
+    </div>
+    </div>
 }
