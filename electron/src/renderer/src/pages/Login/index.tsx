@@ -1,7 +1,7 @@
 import { type ChangeEvent, useState } from "react"
 import React from "react"
 import type{ IAuthGateway } from "../../Infrastructure/IAuthGateway.js"
-import { useNavigate } from "react-router"
+import { Link, useNavigate } from "react-router"
 import { ActionButton, FallBackButton } from "../Home/Shared/Button.js"
 
 export default function Login({gateway}:{gateway:IAuthGateway}){
@@ -53,6 +53,7 @@ export default function Login({gateway}:{gateway:IAuthGateway}){
             />
             <ActionButton text="Entrar" onClick={onSubmit}/>
         </form>
+        <Link to={"/Recover"}>Esqueci a senha</Link>
         <FallBackButton text="Criar perfil" onClick={onClick}/>
     </div>
 }
